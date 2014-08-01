@@ -46,7 +46,7 @@
                         <span class="help-block">{{ $errors->first('last_name') }}</span>
                         @endif
                     </div>
-                    <input class="btn btn-lg btn-success btn-block" type="submit" value="Register">
+                    <button class="btn btn-lg btn-success btn-block" type="submit" name="action" value="register">Register</button>
                 </fieldset>
             </form>
         </div>

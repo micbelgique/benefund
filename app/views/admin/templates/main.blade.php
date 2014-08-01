@@ -32,7 +32,7 @@
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/assets/js/bootstrap.min.js"></script>
     @if( ! is_null( $inline_js ) && ! empty( $inline_js ) )

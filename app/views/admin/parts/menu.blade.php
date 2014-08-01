@@ -20,6 +20,9 @@
                     </ul>
                 </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ URL::route('home') }}">Back to the site</a></li>
+            </ul>
         </div>
     </div>
 </div>
