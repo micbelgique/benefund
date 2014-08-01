@@ -2,10 +2,10 @@
 
 class HomeController extends BaseController {
 
-    protected $layout = 'templates.main';
+    protected $layout = 'public.templates.main';
 
     public function showIndex() {
-        $this->layout->content = View::make('home.index');
+        $this->layout->content = View::make('public.home.index');
     }
 
 }
