@@ -1,0 +1,1 @@
+<h2 class="page-header">@lang('home.title')</h2>
