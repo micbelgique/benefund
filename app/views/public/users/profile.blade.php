@@ -7,15 +7,38 @@
 </div>
 @endif
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <div class="row">
-        <div class="col-md-2">
-            <div class="text-center">
-                <span class="glyphicon glyphicon-user icon-size"></span>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-center">
+                    {{ Auth::user()->get_avatar_url() ? '<img src="' . Auth::user()->get_avatar_url() . '?v=' . time() . '" alt="Avatar" class="img-circle">' : '<span class="glyphicon glyphicon-user icon-size"></span>' }}
+                    </p>
+                </div>
             </div>
-            <a href="#" class="btn btn-info btn-block">Upload</a>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group image-preview">
+                        <input type="text" class="form-control image-preview-filename" disabled="disabled">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                            <div class="btn btn-default image-preview-input">
+                                <span class="glyphicon glyphicon-folder-open"></span>
+                                <span class="image-preview-input-title">Browse</span>
+                                <input type="file" accept="image/png, image/jpeg, image/gif" name="avatar"/>
+                            </div>
+                        </span>
+                        @if( $errors->has('avatar') )
+                        <span class="help-block">{{ $errors->first('avatar') }}</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-8">
             <div class="form-group {{ $errors->has('first_name') ? 'has-error has-feedback' : '' }}">
                 <label for="first_name">First name</label>
                 <input type="text" class="form-control" name="first_name" id="first_name" value="{{ Input::old('first_name', $user->first_name) }}">
@@ -58,7 +81,7 @@
             </div>
             <div class="form-group {{ $errors->has('bio') ? 'has-error has-feedback' : '' }}">
                 <label for="bio">Bio</label>
-                <textarea class="form-control" name="bio" id="bio">{{ Input::old('bio', $user->bio) }}</textarea>
+                <textarea class="form-control summernote" name="bio" id="bio">{{ Input::old('bio', $user->bio) }}</textarea>
                 @if( $errors->has('bio' ) )
                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                 <span class="help-block">{{ $errors->first('bio') }}</span>

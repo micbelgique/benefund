@@ -15,8 +15,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static $rules = array(
 		'email'                 => 'required|email|unique:users',
-		'password'              => 'required|alpha_num|min:7|confirmed',
-		'password_confirmation' => 'required|alpha_num',
+		'password'              => 'required|min:7|confirmed',
+		'password_confirmation' => 'required',
 		'first_name'            => 'required|min:2',
 		'last_name'             => 'required|min:2'
 	);
@@ -31,6 +31,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function role() {
 		return $this->belongsTo('Role');
+	}
+
+	public function get_avatar_url() {
+		$avatar_url = 'uploads/avatars/' . $this->id . '.png';
+		if( File::exists( $avatar_url ) ) {
+			return $avatar_url;
+		}
+		return false;
 	}
 
 }

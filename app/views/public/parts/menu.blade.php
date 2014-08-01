@@ -33,7 +33,7 @@
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <p class="text-center">
-                                            <span class="glyphicon glyphicon-user icon-size"></span>
+                                            {{ Auth::user()->get_avatar_url() ? '<img src="' . Auth::user()->get_avatar_url() . '" alt="Avatar" class="img-circle">' : '<span class="glyphicon glyphicon-user icon-size"></span>' }}
                                         </p>
                                     </div>
                                     <div class="col-lg-8">
