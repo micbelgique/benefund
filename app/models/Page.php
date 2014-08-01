@@ -14,6 +14,11 @@ class Page extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $hidden = [];
+	protected $hidden = array();
 
+	/**
+	 * The attributes focused by mass assignment.
+	 * 
+	 */
+	protected $fillable = array('title', 'content', 'published_on', 'excerpt', 'author_id');
 }
