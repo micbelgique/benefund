@@ -25,7 +25,7 @@
     <![endif]-->
   </head>
   <body>
-    @include('parts.menu')
+    @include('public.parts.menu')
 
     <div class="container-fluid">
     {{ $content }}

@@ -11,7 +11,13 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ URL::route('home') }}">@lang('menu.home')</a></li>
+                <li class="active"><a href="{{ URL::route('home') }}">Home</a></li>
+                @if( ! Auth::check() )
+                <li><a href="{{ URL::route('login') }}">Login</a></li>
+                <li><a href="{{ URL::route('register') }}">Register</a></li>
+                @else
+                <li><a href="{{ URL::route('logout') }}">Logout</a></li>
+                @endif
             </ul>
         </div>
     </div>

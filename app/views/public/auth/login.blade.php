@@ -1,10 +1,10 @@
 <div class="col-md-4 col-md-offset-4">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Login via site</h3>
+            <h3 class="panel-title">@lang('auth/login.title')</h3>
         </div>
         <div class="panel-body">
-            <form accept-charset="UTF-8" role="form" action="{{ URL::route('auth.login') }}" method="post">
+            <form accept-charset="UTF-8" role="form" action="{{ URL::route('login') }}" method="post">
             @if (Session::has('login_errors'))
             <div class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">@lang('app.close')</span></button>
