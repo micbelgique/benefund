@@ -21,4 +21,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'last_name'             => 'required|min:2'
 	);
 
+	public static $rules_update = array(
+		'email'                 => 'required|email',
+		'password'              => 'alpha_num|min:7|confirmed',
+		'password_confirmation' => 'alpha_num',
+		'first_name'            => 'required|min:2',
+		'last_name'             => 'required|min:2'
+	);
+
+	public function role() {
+		return $this->belongsTo('Role');
+	}
+
 }

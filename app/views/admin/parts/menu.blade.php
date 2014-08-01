@@ -13,6 +13,9 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ URL::route('admin.home') }}">@lang('menu.admin.home')</a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ URL::route('home') }}">Back to the site</a></li>
+            </ul>
         </div>
     </div>
 </div>

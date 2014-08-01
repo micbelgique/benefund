@@ -23,7 +23,7 @@
                             <input name="remember" type="checkbox" value="Remember Me"> Remember Me
                         </label>
                     </div>
-                    <input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+                    <button class="btn btn-lg btn-success btn-block" name="action" value="login">Login</button>
                 </fieldset>
             </form>
             <center><h4>OR</h4></center>
