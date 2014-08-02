@@ -11,6 +11,10 @@ class UsersController extends BaseController {
     }
 
     public function showIndex() {
+        $this->layout->content = View::make('public.users.list')->with('users', User::all());
+    }
+
+    public function showProfile() {
         $this->scripts[] = 'assets/js/users.profile.js';
         $this->layout->content = View::make('public.users.profile')
             ->with('user', Auth::user());
@@ -19,16 +23,20 @@ class UsersController extends BaseController {
     public function postUpdate() {
         $validator = Validator::make( Input::all(), User::$rules_update );
         if( $validator->passes() ) {
-            $avatar = Input::file('avatar');
-            $destination_path = 'uploads/avatars';
-            $file_name = Auth::user()->id;
+            $avatar = Input::file('avatar', null);
+            if( null !== $avatar ) {
+                $destination_path = 'uploads/avatars';
+                $file_name = Auth::user()->id;
 
-            $path_parts = explode('.', $avatar->getClientOriginalName() );
-            $ext = $path_parts[count($path_parts) - 1];
+                $path_parts = explode('.', $avatar->getClientOriginalName() );
+                $ext = $path_parts[count($path_parts) - 1];
 
-            $upload_success = Input::file('avatar')->move($destination_path, $file_name . '.png');
+                $avatar_passes = Input::file('avatar')->move($destination_path, $file_name . '.png');
+            } else {
+                $avatar_passes = true;
+            }
 
-            if( $upload_success ) {
+            if( $avatar_passes ) {
                 if( User::where('email', Input::get('email'))->where('id', '!=', Auth::user()->id)->count() == 0 ) {
                     $user = User::find(Auth::user()->id);
                     $user->email      = Input::get('email');
@@ -50,6 +58,16 @@ class UsersController extends BaseController {
 
         } else {
             return Redirect::route('profile')->withErrors($validator)->withInput();
+        }
+    }
+
+    public function showView($id) {
+        $user = User::find($id);
+        if( $user && $user->id == $id ) {
+            $this->layout->content = View::make('public.users.view')
+            ->with('user', $user);
+        } else {
+            return Redirect::back()->withMessage(Lang::get('users.not_found'));
         }
     }
 

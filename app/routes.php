@@ -8,7 +8,7 @@ Route::get('/admin', array('as' => 'admin.home', 'uses' => 'Admin\HomeController
 
 Route::group(array('before' => 'auth'), function() {
 
-    Route::get('/profile', array('as' => 'profile', 'uses' => 'UsersController@showIndex'));
+    Route::get('/profile', array('as' => 'profile', 'uses' => 'UsersController@showProfile'));
     Route::post('/profile', array('as' => 'profile', 'uses' => 'UsersController@postUpdate'));
 
     Route::get('/logout', array('as' => 'logout', 'uses' => 'AuthController@showLogout'));
@@ -23,3 +23,8 @@ Route::post('/register', array('as' => 'register', 'uses' => 'AuthController@pos
 
 Route::when('admin/*', 'auth' );
 Route::when('admin', 'auth' );
+
+Route::get('/members', array('as' => 'public.members', 'uses' => 'UsersController@showIndex'));
+Route::get('/members/{id}', array('as' => 'public.member', 'uses' => 'UsersController@showView'));
+
+Route::get('/pledges', array('as' => 'public.pledges', 'uses' => 'CampaignsPledgesController@showIndex'));

@@ -33,6 +33,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->belongsTo('Role');
 	}
 
+	public function campaigns() {
+		return $this->hasMany('Campaign', 'item_vendor_id', 'id');
+	}
+
 	public function get_avatar_url() {
 		$avatar_url = 'uploads/avatars/' . $this->id . '.png';
 		if( File::exists( $avatar_url ) ) {

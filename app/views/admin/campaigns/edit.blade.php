@@ -22,7 +22,7 @@
         <div class="col-md-6">
             <div class="form-group {{ $errors->has('description') ? 'has-error has-feedback' : '' }}">
                 <label for="name">@lang('admin/campaigns.form.labels.description')</label>
-                <textarea class="form-control" rows="3" name="description" id="description" value="{{ Input::old('description', $campaign->description) }}"></textarea>
+                <textarea class="form-control" rows="3" name="description" id="description">{{ Input::old('description', $campaign->description) }}</textarea>
                 @if( $errors->has('description' ) )
                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                 <span class="help-block">{{ $errors->first('description') }}</span>
@@ -62,7 +62,7 @@
         <div class="col-md-6">
             <div class="form-group {{ $errors->has('item_item_description') ? 'has-error has-feedback' : '' }}">
                 <label for="name">@lang('admin/campaigns.form.labels.item_description')</label>
-                <textarea class="form-control" rows="3" name="item_description" id="item_description" value="{{ Input::old('item_description', $campaign->item_description) }}"></textarea>
+                <textarea class="form-control" rows="3" name="item_description" id="item_description">{{ Input::old('item_description', $campaign->item_description) }}</textarea>
                 @if( $errors->has('item_description' ) )
                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                 <span class="help-block">{{ $errors->first('item_description') }}</span>
@@ -142,7 +142,7 @@
         <div class="col-md-6">
             <div class="form-group {{ $errors->has('item_target_description') ? 'has-error has-feedback' : '' }}">
                 <label for="name">@lang('admin/campaigns.form.labels.target_description')</label>
-                <textarea class="form-control" rows="3" name="target_description" id="target_description" value="{{ Input::old('target_description', $campaign->target_description) }}"></textarea>
+                <textarea class="form-control" rows="3" name="target_description" id="target_description">{{ Input::old('target_description', $campaign->target_description) }}</textarea>
                 @if( $errors->has('target_description' ) )
                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                 <span class="help-block">{{ $errors->first('target_description') }}</span>
