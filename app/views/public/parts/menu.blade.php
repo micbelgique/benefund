@@ -12,7 +12,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ URL::route('home') }}">@lang('menu.home')</a></li>
-                <li><a href="{{ URL::route('public.campaigns') }}">@lang('menu.campaigns')</a></li>
+                <li><a href="{{ URL::route('public.campaigns.new') }}">@lang('menu.campaigns.new')</a></li>
                 @if( ! Auth::check() )
                 <li><a href="{{ URL::route('login') }}">@lang('menu.login')</a></li>
                 <li><a href="{{ URL::route('register') }}">@lang('menu.register')</a></li>

@@ -2,8 +2,6 @@
 
 // Routes specified by Romain Carlier
 
-Route::get('/campaigns2', array('as' => 'public.campaigns2', 'uses' => 'Campaigns2Controller@showIndex'));
-Route::post('/campaigns2', array('as' => 'public.campaigns2.search', 'uses' => 'Campaigns2Controller@showSearch'));
 
 Route::get('/admin/pages', array('as' => 'admin.pages', 'uses' => 'Admin\PagesController@showIndex'));
 Route::get('/admin/pages/new', array('as' => 'admin.pages.new', 'uses' => 'Admin\PagesController@showNew'));
@@ -18,3 +16,12 @@ Route::post('admin/categories/new', array('as' => 'admin.categories.create', 'us
 Route::get('/admin/categories/{id}/edit', array('as' => 'admin.categories.edit', 'uses' => 'Admin\CategoriesController@showEdit'));
 Route::post('/admin/categories/{id}/edit', array( 'as' => 'admin.categories.update', 'uses' => 'Admin\CategoriesController@postUpdate'));
 Route::post('/admin/categories/{id}/delete', array( 'as' => 'admin.categories.delete', 'uses' => 'Admin\CategoriesController@postDelete'));
+
+Route::get('/campaigns', array('as' => 'public.campaigns', 'uses' => 'CampaignsController@showNew'));
+
+Route::get('/campaigns/new', array('as' => 'public.campaigns.new', 'uses' => 'CampaignsController@showNew'));
+Route::post('/campaigns/new', array('as' => 'public.campaigns.create', 'uses' => 'CampaignsController@postCreate'));
+
+Route::get('/campaigns/{id}', array('as' => 'public.campaigns.details', 'uses' => 'CampaignsController@showDetails'));
+
+Route::get('/categories/{id}', array('as' => 'public.categories.details', 'uses' => 'CategoriesController@showDetails'));

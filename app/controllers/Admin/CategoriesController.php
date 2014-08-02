@@ -39,7 +39,7 @@ class CategoriesController extends BaseController {
         	$category = Category::create(
         		array(
 					'title'        => Input::get('title'),
-					'description'      => $input_content,
+					'description'  => Input::get('description'),
         		)
         	);
 

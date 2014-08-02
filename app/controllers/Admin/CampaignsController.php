@@ -2,7 +2,7 @@
 
 namespace Admin;
 
-use \View, \Campaign, \Lang, \Validator, \Input, \Redirect, \Auth;
+use \View, \Campaign, \Category, \Lang, \Validator, \Input, \Redirect, \Auth;
 
 class CampaignsController extends BaseController {
 
@@ -35,7 +35,9 @@ class CampaignsController extends BaseController {
      * @return Response
      */
     public function showNew() {
+        $categories = Category::all();
         $this->layout->content = View::make('admin.campaigns.create');
+        $this->layout->content->categories = $categories;
     }
 
     public function postCreate() {
@@ -58,7 +60,8 @@ class CampaignsController extends BaseController {
                     'target_adress_city'    => Input::get('target_adress_city'),
                     'target_adress_country' => Input::get('target_adress_country'),
                     'target_description'    => Input::get('target_description'),
-                    'item_price'            => Input::get('item_price', 0)
+                    'item_price'            => Input::get('item_price', 0),
+                    'category_id'           => Input::get('category_id', 0),
                 )
             );
 
@@ -74,6 +77,8 @@ class CampaignsController extends BaseController {
     public function showEdit($id) {
         $campaign = Campaign::find($id);
 
+        $categories = Category::all();
+        
         // If no item in database
         if(empty($campaign) || empty($campaign->id))
             return Redirect::route('admin.campaigns')
@@ -84,6 +89,7 @@ class CampaignsController extends BaseController {
 
         $this->layout->content = View::make('admin.campaigns.edit');
         $this->layout->content->campaign = $campaign;
+        $this->layout->content->categories = $categories;
     }
 
     public function postUpdate($id) {
@@ -110,7 +116,8 @@ class CampaignsController extends BaseController {
                     'target_adress_city'    => Input::get('target_adress_city'),
                     'target_adress_country' => Input::get('target_adress_country'),
                     'target_description'    => Input::get('target_description'),
-                    'item_price'            => intval(Input::get('item_price', 0) * 100 )
+                    'item_price'            => intval(Input::get('item_price', 0) * 100 ),
+                    'category_id'           => Input::get('category_id', 0),
                 )
             )->save();
 

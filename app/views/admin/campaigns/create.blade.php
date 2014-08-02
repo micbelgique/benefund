@@ -29,6 +29,25 @@
                 @endif
             </div>
         </div>
+        @if( count( $categories ) > 0 )
+        <div class="col-md-12">
+            <div class="form-group {{ $errors->has('category_id') ? 'has-error has-feedback' : '' }}">
+                <label for="name">@lang('campaigns.form.labels.category')</label>
+                <select name="category_id" class="form-control">
+                @foreach( $categories as $index => $category )
+                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                @endforeach
+                    <option value="0">@lang('campaigns.form.no_category')</option>
+                </select>
+                @if( $errors->has('category_id' ) )
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                <span class="help-block">{{ $errors->first('category_id') }}</span>
+                @endif
+            </div>
+        </div>
+        @else
+        <input type="hidden" name="category_id" id="category_id" value="0">
+        @endif
         <div class="col-md-6">
             <div class="form-group {{ $errors->has('date_start') ? 'has-error has-feedback' : '' }}">
                 <label for="name">@lang('admin/campaigns.form.labels.date_start')</label>

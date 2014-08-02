@@ -6,38 +6,20 @@
 
   <!-- List group -->
   <div class="list-group">
-    <a href="" class="list-group-item">
-        <div class="media">
-            <div class="pull-left">
-                <img class="media-object" src="http://placehold.it/64x64" alt="Image">
+    @if( ! is_null( $categories ) && ! empty( $categories ) )
+        @foreach( $categories as $category )
+        <a href="{{ URL::route('public.categories.details', [ 'id' => $category->id ]) }}" class="list-group-item">
+            <div class="media">
+                <div class="pull-left">
+                    <img class="media-object" src="http://placehold.it/64x64" alt="{{ $category->title }}">
+                </div>
+                <div class="media-body">
+                    <h4 class="list-group-item-heading">{{ $category->title }}</h4>
+                    <p class="list-group-item-text">{{ $category->description }}</p>
+                </div>
             </div>
-            <div class="media-body">
-                <h4 class="list-group-item-heading">Littérature</h4>
-                <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-            </div>
-        </div>
-    </a>
-    <a href="" class="list-group-item">
-        <div class="media">
-            <div class="pull-left">
-                <img class="media-object" src="http://placehold.it/64x64" alt="Image">
-            </div>
-            <div class="media-body">
-                <h4 class="list-group-item-heading">Oeuvres d'art</h4>
-                <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-            </div>
-        </div>
-    </a>
-    <a href="" class="list-group-item">
-        <div class="media">
-            <div class="pull-left">
-                <img class="media-object" src="http://placehold.it/64x64" alt="Image">
-            </div>
-            <div class="media-body">
-                <h4 class="list-group-item-heading">Pianos anciens</h4>
-                <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-            </div>
-        </div>
-    </a>
+        </a>
+        @endforeach
+    @endif
   </ul>
 </div>
