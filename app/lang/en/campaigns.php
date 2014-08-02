@@ -68,7 +68,7 @@ return array(
 	'index' => array(
 		'like' => 'Like',
 		'view' => 'View',
-		'fund' => 'Fund'
+		'fund' => 'Fund',
+		'current_progress' => ':current of :max $ funded'
 	)
-	"form.labels.title" => "Titre de la campagne"
 );
