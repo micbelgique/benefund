@@ -23,6 +23,7 @@ class CampaignsController extends BaseController {
         }
 
         $this->layout->content = View::make('public.campaigns.index')->with('campaigns', $campaigns);
+        $this->layout->content_title = Lang::get('campaigns.title');
     }
 
     /**
@@ -32,18 +33,26 @@ class CampaignsController extends BaseController {
      */
     public function showNew() {
         $this->layout->content = View::make('public.campaigns.create');
+        $this->layout->content_title = Lang::get('campaigns.new.title');
     }
 
     public function postCreate() {
+
+        $this->layout->content_title = Lang::get('campaigns.new.title');
 
         $validator = Validator::make(Input::all(), Campaign::$rules );
 
         if( $validator->passes() ) {
 
+            $date_start = \Datetime::createFromFormat('Y-m-d', Input::get('date_start'));
+            $date_end = \Datetime::createFromFormat('Y-m-d', Input::get('date_end'));
+
             $campaign = Campaign::create(
                 array(
                     'title'                 => Input::get('title'),
                     'description'           => Input::get('description'),
+                    'date_start'            => $date_start,
+                    'date_end'              => $date_end,
                     'item_title'            => Input::get('item_title'),
                     'item_vendor_id'        => Auth::user()->id,
                     'item_description'      => Input::get('item_description'),
@@ -79,10 +88,14 @@ class CampaignsController extends BaseController {
             return Redirect::back()->with('message', Lang::get('campaigns.edit.unauthorized'));
 
         $this->layout->content = View::make('public.campaigns.edit');
+        $this->layout->content_title = Lang::get('campaigns.edit.title');
         $this->layout->content->campaign = $campaign;
     }
 
     public function postUpdate($id) {
+
+        $this->layout->content_title = Lang::get('campaigns.edit.title');
+
         $campaign = Campaign::find($id);
 
         // If no item in database

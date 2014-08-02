@@ -1,5 +1,3 @@
-<h2 class="page-header">@lang('campaigns.new.title')</h2>
-
 @if( Session::has( 'message' ) )
 <div class="alert alert-{{ $errors->has() ? 'danger' : 'success' }} alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">@lang('app.close')</span></button>
@@ -32,7 +30,7 @@
         <div class="col-md-6">
             <div class="form-group {{ $errors->has('date_start') ? 'has-error has-feedback' : '' }}">
                 <label for="name">@lang('campaigns.form.labels.date_start')</label>
-                <input type="text" class="form-control" name="date_start" id="date_start" value="{{ Input::old('date_start') }}" placeholder="@lang('campaigns.form.placeholders.date_start')">
+                <input type="date" class="form-control" name="date_start" id="date_start" value="{{ Input::old('date_start') }}" placeholder="@lang('campaigns.form.placeholders.date_start')">
                 @if( $errors->has('date_start' ) )
                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                 <span class="help-block">{{ $errors->first('date_start') }}</span>
@@ -42,7 +40,7 @@
         <div class="col-md-6">
             <div class="form-group {{ $errors->has('date_end') ? 'has-error has-feedback' : '' }}">
                 <label for="name">@lang('campaigns.form.labels.date_end')</label>
-                <input type="text" class="form-control" name="date_end" id="date_end" value="{{ Input::old('date_end') }}" placeholder="@lang('campaigns.form.placeholders.date_end')">
+                <input type="date" class="form-control" name="date_end" id="date_end" value="{{ Input::old('date_end') }}" placeholder="@lang('campaigns.form.placeholders.date_end')">
                 @if( $errors->has('date_end' ) )
                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                 <span class="help-block">{{ $errors->first('date_end') }}</span>

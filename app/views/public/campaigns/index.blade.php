@@ -1,5 +1,3 @@
-<h2 class="campaign-header">@lang('campaigns.title')</h2>
-
 @if( Session::has('message') )
 <div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif

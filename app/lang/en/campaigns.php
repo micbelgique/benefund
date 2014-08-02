@@ -48,21 +48,23 @@ return array(
 
 		'new.submit' => 'Create',
 		'edit.submit' => 'Edit',
-	),
 
-	'search.placeholder' => 'Search a campaign',
-	'search.button' => 'Search',
+		'buttons' => array(
+			'new' => 'New',
+			'edit' => 'Edit',
+			'remove' => 'Delete'
+		),
 
-	'buttons' => array(
-		'new' => 'New',
-		'edit' => 'Edit',
-		'remove' => 'Delete'
+		'search' => array(
+			'title' => 'Researched campaigns',
+			'placeholder' => 'Search a campaign',
+			'button' => 'Search',
+		),
 	),
 
 	'title' => 'Campaigns',
 	'new.title' => 'New campaign',
 	'edit.title' => 'Campaign edit',
-	'search.title' => 'Researched campaigns',
 	'empty' => 'No campaigns',
 
 	'index' => array(
@@ -70,5 +72,9 @@ return array(
 		'view' => 'View',
 		'fund' => 'Fund',
 		'current_progress' => ':current of :max $ funded'
+	),
+
+	'delete' => array(
+		'message' => 'Campaign deleted'
 	)
 );
