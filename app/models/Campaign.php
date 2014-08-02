@@ -18,6 +18,7 @@ class Campaign extends Eloquent {
 		'item_title',
 		'item_vendor_id',
 		'item_description',
+		'item_price',
 		'target_title',
 		'target_adress_street',
 		'target_adress_street2',
@@ -25,4 +26,12 @@ class Campaign extends Eloquent {
 		'target_adress_city',
 		'target_adress_country',
 		'target_description');
+
+	public static $rules = array(
+		'title'          => 'required|min:3',
+		'item_title'     => 'required|min:3',
+		// 'item_vendor_id' => 'required|exists:users,id',
+		'target_title'   => 'required|min:3',
+	);
+
 }
