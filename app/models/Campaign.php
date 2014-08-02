@@ -24,13 +24,5 @@ class Campaign extends Eloquent {
 		'target_adress_zip',
 		'target_adress_city',
 		'target_adress_country',
-		'target_description'
-	);
-
-	public static $rules = array(
-		'title'          => 'required|min:3',
-		'item_title'     => 'required|min:3',
-		// 'item_vendor_id' => 'required|exists:users,id',
-		'target_title'   => 'required|min:3',
-	);
+		'target_description');
 }
