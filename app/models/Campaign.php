@@ -7,7 +7,7 @@ class Campaign extends Eloquent {
 	 *
 	 * @var string
 	 */
-	protected $table = 'campaign';
+	protected $table = 'campaigns';
 
 	/**
 	 * The attributes focused by mass assignment.
