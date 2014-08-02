@@ -26,5 +26,3 @@ Route::when('admin', 'auth' );
 
 Route::get('/members', array('as' => 'public.members', 'uses' => 'UsersController@showIndex'));
 Route::get('/members/{id}', array('as' => 'public.member', 'uses' => 'UsersController@showView'));
-
-Route::get('/pledges', array('as' => 'public.pledges', 'uses' => 'CampaignsPledgesController@showIndex'));
