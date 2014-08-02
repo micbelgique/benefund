@@ -25,7 +25,8 @@ class Campaign extends Eloquent {
 		'target_adress_zip',
 		'target_adress_city',
 		'target_adress_country',
-		'target_description');
+		'target_description'
+	);
 
 	public static $rules = array(
 		'title'          => 'required|min:3',
@@ -33,5 +34,9 @@ class Campaign extends Eloquent {
 		// 'item_vendor_id' => 'required|exists:users,id',
 		'target_title'   => 'required|min:3',
 	);
+
+	public function vendor() {
+		return $this->hasOne('User', 'id', 'item_vendor_id' );
+	}
 
 }

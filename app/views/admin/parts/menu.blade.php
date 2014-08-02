@@ -19,6 +19,13 @@
                         <li><a href="{{ URL::route('admin.pages.new') }}">@lang('admin/menu.pages.new')</a></li>
                     </ul>
                 </li>
+                <li class="dropdown {{ $route_parent == 'admin/campaigns' ? 'active' : '' }}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="{{ URL::route('admin.campaigns') }}">@lang('admin/menu.campaigns') <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ URL::route('admin.campaigns') }}">@lang('admin/menu.campaigns.list')</a></li>
+                        <li><a href="{{ URL::route('admin.campaigns.new') }}">@lang('admin/menu.campaigns.new')</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{ URL::route('home') }}">Back to the site</a></li>

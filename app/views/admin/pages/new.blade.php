@@ -43,7 +43,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <input type="checkbox" name="use_current_time" id="use_current_time" /> 
+                        <input type="checkbox" name="use_current_time" id="use_current_time" />
                         <label for="use_current_time">@lang('admin/pages.form.labels.use_current_time')</label>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="content">@lang('admin/pages.form.labels.content')</label>
-                <textarea class="form-control summernote" name="content" id="content" rows="15">{{ Input::old('content') }}</textarea> 
+                <textarea class="form-control summernote" name="content" id="content" rows="15">{{ Input::old('content') }}</textarea>
             </div>
         </div>
     </div>

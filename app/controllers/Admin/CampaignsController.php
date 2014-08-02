@@ -1,8 +1,12 @@
 <?php
 
+namespace Admin;
+
+use \View, \Campaign, \Lang, \Validator, \Input, \Redirect, \Auth;
+
 class CampaignsController extends BaseController {
 
-    protected $layout = 'public.templates.main';
+    protected $layout = 'admin.templates.main';
 
     /**
      * Display a listing of the resource.
@@ -22,7 +26,7 @@ class CampaignsController extends BaseController {
             $campaigns = Campaign::all();
         }
 
-        $this->layout->content = View::make('public.campaigns.index')->with('campaigns', $campaigns);
+        $this->layout->content = View::make('admin.campaigns.index')->with('campaigns', $campaigns);
     }
 
     /**
@@ -31,7 +35,7 @@ class CampaignsController extends BaseController {
      * @return Response
      */
     public function showNew() {
-        $this->layout->content = View::make('public.campaigns.create');
+        $this->layout->content = View::make('admin.campaigns.create');
     }
 
     public function postCreate() {
@@ -58,10 +62,10 @@ class CampaignsController extends BaseController {
                 )
             );
 
-            return Redirect::back()->with('message', Lang::get('campaigns.new.message', array('title' => Input::get('title'))));
+            return Redirect::back()->with('message', Lang::get('admin.campaigns.new.message', array('title' => Input::get('title'))));
         } else {
             return Redirect::back()
-                ->with('message', Lang::get('campaigns.new.error'))
+                ->with('message', Lang::get('admin.campaigns.new.error'))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -72,13 +76,13 @@ class CampaignsController extends BaseController {
 
         // If no item in database
         if(empty($campaign) || empty($campaign->id))
-            return Redirect::route('public.campaigns')
-                ->with('message', Lang::get('campaigns.edit.inexistant'));
+            return Redirect::route('admin.campaigns')
+                ->with('message', Lang::get('admin.campaigns.edit.inexistant'));
 
         if( ! ( $campaign->vendor()->first()->id == Auth::user()->id || Auth::user()->role()->first()->name_tag == 'admin' ) )
-            return Redirect::back()->with('message', Lang::get('campaigns.edit.unauthorized'));
+            return Redirect::back()->with('message', Lang::get('admin.campaigns.edit.unauthorized'));
 
-        $this->layout->content = View::make('public.campaigns.edit');
+        $this->layout->content = View::make('admin.campaigns.edit');
         $this->layout->content->campaign = $campaign;
     }
 
@@ -87,8 +91,8 @@ class CampaignsController extends BaseController {
 
         // If no item in database
         if(empty($campaign) || empty($campaign->id))
-            return Redirect::route('public.campaigns')
-                ->with('message', Lang::get('campaigns.edit.inexistant'));
+            return Redirect::route('admin.campaigns')
+                ->with('message', Lang::get('admin.campaigns.edit.inexistant'));
 
         $validator = Validator::make( Input::all(), Campaign::$rules );
 
@@ -110,10 +114,10 @@ class CampaignsController extends BaseController {
                 )
             )->save();
 
-            return Redirect::back()->with('message', Lang::get('campaigns.edit.message', array('title' => Input::get('title'))));
+            return Redirect::back()->with('message', Lang::get('admin.campaigns.edit.message', array('title' => Input::get('title'))));
         } else {
             return Redirect::back()
-                ->with('message', Lang::get('campaigns.edit.error'))
+                ->with('message', Lang::get('admin.campaigns.edit.error'))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -124,15 +128,15 @@ class CampaignsController extends BaseController {
 
         // If no item in database
         if(empty($campaign) || empty($campaign->id))
-            return Redirect::route('public.campaigns')
-                ->with('message', Lang::get('campaigns.edit.inexistant'));
+            return Redirect::route('admin.campaigns')
+                ->with('message', Lang::get('admin.campaigns.edit.inexistant'));
 
         try {
             $campaign->delete();
         } catch(Exception $e){
-            return Redirect::back()->with('message', Lang::get('campaigns.delete.error'))->withInput();
+            return Redirect::back()->with('message', Lang::get('admin.campaigns.delete.error'))->withInput();
         }
 
-        return Redirect::route('public.campaigns')->with('message', Lang::get('campaigns.delete.message', array('title' => Input::get('title'))));
+        return Redirect::route('admin.campaigns')->with('message', Lang::get('admin.campaigns.delete.message', array('title' => Input::get('title'))));
     }
 }
