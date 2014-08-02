@@ -7,15 +7,15 @@
     <title>@lang('app.title') — {{ isset( $title ) ? $title : Lang::get('menu.home') }}</title>
 
     <!-- Bootstrap -->
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link href="/assets/css/bootstrap-theme.min.css" rel="stylesheet"> -->
-    <link href="/assets/css/bootstrap-flatly.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('assets/css/bootstrap-flatly.css') }}" rel="stylesheet">
     @if( ! is_null( $styles ) && ! empty( $styles ) )
     @foreach( $styles as $style )
     <link href="{{ $style }}" rel="stylesheet">
     @endforeach
     @endif
-    <link href="/assets/css/style.css?t={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/style.css?t=' . time() ) }}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,13 +32,12 @@
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     @if( ! is_null( $inline_js ) && ! empty( $inline_js ) )
     <script type="text/javascript">{{ $inline_js }}</script>
     @endif
-    <script src="/assets/js/main.js"></script>
     @if( ! is_null( $scripts ) && ! empty( $scripts ) )
     @foreach( $scripts as $script )
     <script src="{{ $script }}"></script>

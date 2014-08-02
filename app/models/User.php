@@ -15,10 +15,30 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static $rules = array(
 		'email'                 => 'required|email|unique:users',
-		'password'              => 'required|alpha_num|min:7|confirmed',
-		'password_confirmation' => 'required|alpha_num',
+		'password'              => 'required|min:7|confirmed',
+		'password_confirmation' => 'required',
 		'first_name'            => 'required|min:2',
 		'last_name'             => 'required|min:2'
 	);
+
+	public static $rules_update = array(
+		'email'                 => 'required|email',
+		'password'              => 'alpha_num|min:7|confirmed',
+		'password_confirmation' => 'alpha_num',
+		'first_name'            => 'required|min:2',
+		'last_name'             => 'required|min:2'
+	);
+
+	public function role() {
+		return $this->belongsTo('Role');
+	}
+
+	public function get_avatar_url() {
+		$avatar_url = 'uploads/avatars/' . $this->id . '.png';
+		if( File::exists( $avatar_url ) ) {
+			return $avatar_url;
+		}
+		return false;
+	}
 
 }
