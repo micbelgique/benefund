@@ -16,6 +16,7 @@ class BaseController extends Controller {
 			$this->layout = View::make($this->layout)
 			    ->with('styles', $this->styles)
 			    ->with('scripts', $this->scripts)
+			    ->with('content_title', '')
 			    ->with('inline_js', $this->inline_js);
 		}
 	}
