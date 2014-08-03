@@ -14,6 +14,9 @@ return array(
 	*/
 
 	'details' => array(
-		'title' => ':category'
-	)
+		'title' => ':category',
+		'no_campaign' => 'There\'s no active campaigns'
+	),
+
+	'active_campaigns' => 'Active campaigns'
 );

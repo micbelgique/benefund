@@ -5,12 +5,6 @@
 </div>
 @endif
 
-@if( Auth::check() && ( $campaign->vendor->id == Auth::user()->id || Auth::user()->role->name_tag == 'admin' ) )
-<div class="pull-right">
-    <a href="{{ URL::route('public.campaigns.edit', [ 'id' => $campaign->id ]) }}" class="btn btn-primary">@lang('campaigns.buttons.edit')</a>
-</div>
-@endif
-
 <div class="row">
     <div class="col-xs-12">
         <div class="thumbnail">
@@ -33,40 +27,48 @@
         </div>
     </div>
 </div>
+@if( Auth::check() && ( $campaign->vendor->id == Auth::user()->id || Auth::user()->role->name_tag == 'admin' ) )
+<div class="pull-right">
+    <a href="{{ URL::route('public.campaigns.edit', [ 'id' => $campaign->id ]) }}" class="btn btn-primary">Edit this campaign</a>
+</div>
+<br><br><br>
+@endif
 <div class="row">
     <div class="col-md-12">
-        <h4>@lang('campaigns.pledges.title')</h4>
-        <div class="row">
-            @if( 0 < count($campaign->pledges) )
-            @foreach( $campaign->pledges as $pledge )
-            <div class="col-md-4">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">{{ $pledge->title }}</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div style="height: 100px">{{ strlen($pledge->description) > 253 ? substr($pledge->description, 0, 250) . '...' : $pledge->description }}</div>
-                    </div>
-                    <div class="panel-footer">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-primary btn-sm">Buy</a>
-                                </div>
-                                <div class="pull-right">
-                                    <span class="label label-warning">Limited 7/7</span><br />
+        <div class="thumbnail" style="padding: 12px">
+            <h4>@lang('campaigns.pledges.title')</h4>
+            <div class="row caption">
+                @if( 0 < count($campaign->pledges) )
+                @foreach( $campaign->pledges as $pledge )
+                <div class="col-md-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ $pledge->title }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div style="height: 100px">{{ strlen($pledge->description) > 253 ? substr($pledge->description, 0, 250) . '...' : $pledge->description }}</div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-primary btn-sm">Buy</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <span class="label label-warning">Limited 7/7</span><br />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
+                @else
+                <div class="alert alert-warning">
+                    <p>@lang('campaigns.pledges.empty')</p>
+                </div>
+                @endif
             </div>
-            @endforeach
-            @else
-            <div class="alert alert-warning">
-                <p>@lang('campaigns.pledges.empty')</p>
-            </div>
-            @endif
         </div>
     </div>
 </div>

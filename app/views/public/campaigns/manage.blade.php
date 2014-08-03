@@ -41,7 +41,16 @@
             <td>{{ $campaign->title }}</td>
         </tr>
         <tr>
-            <td colspan="2">{{ $campaign->description }}</td>
+            <td colspan="2">
+                <div class="media">
+                  <a class="pull-left" href="#">
+                    <img class="media-object" src="{{ $campaign->get_thumb() }}" alt="@lang('campaigns.view.invite', ['name'=>$campaign->title])">
+                  </a>
+                  <div class="media-body">
+                    {{ $campaign->description }}
+                  </div>
+                </div>
+            </td>
         </tr>
         <tr>
             <td colspan="2">
