@@ -29,7 +29,11 @@ return array(
 			'target_adress_zip' => 'City code',
 			'target_adress_city' => 'City',
 			'target_adress_country' => 'Country',
-			'target_description' => 'Description'
+			'target_description' => 'Description',
+			'recipient' => 'Recipient',
+			'item' => 'Item',
+			'category' => 'Category',
+			'introduction' => 'Introduction'
 		),
 		'placeholders' => array(
 			'title' => 'Campaign\'s title',
@@ -46,8 +50,13 @@ return array(
 			'target_description' => 'Description of destination museum/association',
 		),
 
-		'new.submit' => 'Create',
-		'edit.submit' => 'Edit',
+		'new' => array(
+			'submit' => 'Create'
+		),
+
+		'edit' => array(
+			'submit' => 'Edit'
+		),
 
 		'buttons' => array(
 			'new' => 'New',
@@ -63,8 +72,8 @@ return array(
 	),
 
 	'title' => 'Campaigns',
+	'list' => 'Campaigns',
 	'new.title' => 'New campaign',
-	'edit.title' => 'Campaign edit',
 	'empty' => 'No campaigns',
 
 	'index' => array(
@@ -74,7 +83,46 @@ return array(
 		'current_progress' => ':current of :max $ funded'
 	),
 
+	'new' => array(
+		'error' => 'Some errors have been detected'
+	),
+
+	'edit' => array(
+		'title' => 'Campaign edit',
+		'message' => 'The campaign has been edited',
+		'unauthorized' => 'You can\'t edit this campaign'
+	),
+
 	'delete' => array(
 		'message' => 'Campaign deleted'
+	),
+
+	'pledges' => array(
+		'title' => 'Pledges',
+		'empty' => 'No pledges'
+	),
+
+	'details' => array(
+		'vendor' => 'Vendor',
+		'address' => 'Address',
+		'geolocation' => 'Location'
+	),
+
+	'buttons' => array(
+		'edit' => 'Edit'
+	),
+
+	'sidebar' => array(
+		'pledges' => array(
+			'title' => 'Pledges',
+			'description' => 'Add some pledges'
+		)
+	),
+
+	'manage' => array(
+		'title' => 'Manage campaigns',
+		'table' => array(
+			'title' => 'Campaign title'
+		)
 	)
 );

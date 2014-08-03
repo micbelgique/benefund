@@ -58,10 +58,10 @@ class CampaignsController extends BaseController {
                 )
             );
 
-            return Redirect::back()->with('message', Lang::get('campaign.new.message', array('title' => Input::get('title'))));
+            return Redirect::back()->with('message', Lang::get('campaigns.new.message', array('title' => Input::get('title'))));
         } else {
             return Redirect::back()
-                ->with('message', Lang::get('campaign.new.error'))
+                ->with('message', Lang::get('campaigns.new.error'))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -77,7 +77,7 @@ class CampaignsController extends BaseController {
                 ->with('message', Lang::get('campaigns.edit.inexistant'));
 
         if( ! ( $campaign->vendor->id == Auth::user()->id || Auth::user()->role()->first()->name_tag == 'admin' ) )
-            return Redirect::back()->with('message', Lang::get('public.campaigns.edit.unauthorized'));
+            return Redirect::back()->with('message', Lang::get('campaigns.edit.unauthorized'));
 
         $this->layout->content = View::make('public.campaigns.edit');
         $this->layout->content->campaign = $campaign;
