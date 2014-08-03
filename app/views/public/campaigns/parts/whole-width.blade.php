@@ -17,10 +17,10 @@
                     </div>
                     <div class="col-xs-8 col-md-8 col-sm-8">
                         <div class="progress progress-striped active" style="height: 33px">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 33px; width: 60%;">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 33px; width: 60%;">
                                 <span style="font-size: 12px; line-height: 33px">@lang('campaigns.index.current_progress', ['current' => '1.270', 'max' => '<strong>12.765</strong>'])</span>
                             </div>
-                        </div>                                
+                        </div>
                     </div>
                 </div>
             </div>

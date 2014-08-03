@@ -52,7 +52,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="pull-left">
-                                        <a href="{{ URL::route('public.pledges.fund', [ 'id' => $pledge->id ]) }}" class="btn btn-primary btn-sm pledge-fund">Buy</a>
+                                        <a href="{{ URL::route('public.pledges.fund', [ 'id' => $pledge->id ]) }}" class="btn btn-primary btn-sm pledge-fund">Fund this item</a>
                                     </div>
                                     <div class="pull-right hidden">
                                         <span class="label label-warning">Limited 7/7</span><br />

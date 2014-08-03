@@ -57,7 +57,6 @@ $(function(){
                     price_max: $('#edit_pledge_price_max').val()
                 },
                 success: function(response) {
-                    console.log(response);
                     if( response.status == 'fail') {
                         if( response.errors.hasOwnProperty('title') ) {
                             var $child_parent = $('#edit_pledge_title').parents('.form-group').first();
@@ -117,7 +116,6 @@ $(function(){
             url: $this.attr('href'),
             type: 'post',
             success: function(response) {
-                console.log(response);
                 $pledge_modal.find('.modal-content').load(response.view_url);
             }
         });

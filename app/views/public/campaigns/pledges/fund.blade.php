@@ -3,8 +3,8 @@
     <h4 class="modal-title">{{ $pledge->title }}</h4>
 </div>
 <div class="modal-body">
-    <h4 class="page-header">{{ $pledge->price_min }} or more</h4>
-    <blockquote>{{ $pledge->description }}</blockquote>
+    <h4 class="page-header">{{ round( $pledge->price_min / 100, 2) }}€ or more</h4>
+    <div class="well well-lg">{{ $pledge->description }}</div>
 
     <div class="row">
         <div class="col-md-12">
@@ -15,5 +15,5 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">@lang('app.close')</button>
-    <a href="{{ URL::route('public.pledges.buy', [ 'id' => $pledge->id ]) }}" class="btn btn-primary pledge-buy" data-loading-text="@lang('campaigns.pledges.buttons.loading')">@lang('campaigns.pledges.buttons.fund')</button>
+    <a href="{{ URL::route('public.pledges.buy', [ 'id' => $pledge->id ]) }}" class="btn btn-primary pledge-buy" data-loading-text="Loading...">Fund</button>
 </div>

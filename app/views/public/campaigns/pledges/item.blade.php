@@ -9,5 +9,5 @@
     <td colspan="2" class="text-center">{{ round($pledge->price_min/100, 2) }}€ or more</td>
 </tr>
 <tr>
-    <td colspan="2"><a href="{{ URL::route('public.pledges.edit', [ 'id' => $pledge->id ]) }}" class="btn btn-info btn-block pledge-edit">Edit</a></td>
+    <td colspan="2"><a href="{{ URL::route('public.pledges.edit', [ 'id' => $pledge->id ]) }}" class="btn btn-info btn-block pledge-edit"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
 </tr>

@@ -48,6 +48,6 @@
     </td>
 </tr>
 <tr>
-    <td colspan="2"><button type="submit" class="btn btn-success btn-block" name="action" value="create_pledge"><i class="glyphicon glyphicon-yes"></i> @lang('pledges.buttons.add')</button></td>
+    <td colspan="2"><button type="submit" class="btn btn-success btn-block" name="action" value="create_pledge"><i class="glyphicon glyphicon-ok"></i> Save this pledge</button></td>
 </tr>
 </form>
