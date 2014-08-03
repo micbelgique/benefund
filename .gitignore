@@ -7,4 +7,9 @@ composer.lock
 .DS_Store
 Thumbs.db
 sftp-config.json
-sftp-config.json
+public/uploads/campaigns/10_medium.png
+public/uploads/campaigns/6_banner.png
+public/uploads/campaigns/6_medium.png
+public/uploads/campaigns/7_medium.png
+public/uploads/campaigns/8_medium.png
+public/uploads/campaigns/9_medium.png

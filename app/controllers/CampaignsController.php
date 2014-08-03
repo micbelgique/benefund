@@ -43,20 +43,14 @@ class CampaignsController extends BaseController {
 
     public function postCreate()
     {
-        $rules = array(
-            'title' => 'required'
-        );
+        $data = Input::all();
+        $data['item_vendor_id'] = Auth::user()->id;
 
-        $validator = Validator::make(Input::all(), $rules );
+        $validator = Validator::make($data, Campaign::$rules );
 
         if( $validator->passes() ) {
 
-            $campaign = Campaign::create(
-                array(
-                    'title' => Input::get('title'),
-                    'item_vendor_id' => Auth::user()->id
-                )
-            );
+            $campaign = Campaign::create( $data );
 
             return Redirect::back()->with('message', Lang::get('campaigns.new.message', array('title' => Input::get('title'))));
         } else {
@@ -124,5 +118,43 @@ class CampaignsController extends BaseController {
                 ->withErrors($validator)
                 ->withInput();
         }
+    }
+
+    public function postDelete($id) {
+        $campaign = Campaign::find($id);
+
+        // If no item in database
+        if(empty($campaign) || empty($campaign->id))
+            return Redirect::route('public.campaigns')
+                ->with('message', Lang::get('campaigns.edit.inexistant'));
+
+        if( ! ( $campaign->vendor->id == Auth::user()->id || Auth::user()->role()->first()->name_tag == 'admin' ) )
+            return Redirect::back()->with('message', Lang::get('public.campaigns.delete.unauthorized'));
+
+        try {
+            $campaign->delete();
+        } catch(Exception $e){
+            return Redirect::back()->with('message', Lang::get('campaigns.delete.error'))->withInput();
+        }
+
+        return Redirect::back()->with('message', Lang::get('campaigns.delete.message', array('title' => Input::get('title'))));
+    }
+
+    public function showManage() {
+        $campaigns = Campaign::where('item_vendor_id', Auth::user()->id);
+
+        if( Input::get('s', '') != '' ) {
+            $campaigns->where('title', 'LIKE', '%' . Input::get('s') . '%')
+                ->orWhere('description', 'LIKE', '%' . Input::get('s') . '%')
+                ->orWhere('item_title', 'LIKE', '%' . Input::get('s') . '%')
+                ->orWhere('item_description', 'LIKE', '%' . Input::get('s') . '%')
+                ->orWhere('target_title', 'LIKE', '%' . Input::get('s') . '%');
+        }
+
+        $campaigns->orderBy('id', 'desc');
+
+        $this->layout->content = View::make('public.campaigns.manage');
+        $this->layout->content->campaigns = $campaigns->get();;
+        $this->layout->content_title = Lang::get('campaigns.manage.title');
     }
 }
