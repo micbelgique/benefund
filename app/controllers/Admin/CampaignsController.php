@@ -15,18 +15,21 @@ class CampaignsController extends BaseController {
      */
     public function showIndex() {
 
+        $campaigns = Campaign::where('item_vendor_id', Auth::user()->id);
+
         if( Input::get('s', '') != '' ) {
-            $campaigns = Campaign::where('title', 'LIKE', '%' . Input::get('s') . '%')
+            $campaigns->where('title', 'LIKE', '%' . Input::get('s') . '%')
                 ->orWhere('description', 'LIKE', '%' . Input::get('s') . '%')
                 ->orWhere('item_title', 'LIKE', '%' . Input::get('s') . '%')
                 ->orWhere('item_description', 'LIKE', '%' . Input::get('s') . '%')
-                ->orWhere('target_title', 'LIKE', '%' . Input::get('s') . '%')
-                ->get();
-        } else {
-            $campaigns = Campaign::all();
+                ->orWhere('target_title', 'LIKE', '%' . Input::get('s') . '%');
         }
 
-        $this->layout->content = View::make('admin.campaigns.index')->with('campaigns', $campaigns);
+        $campaigns->orderBy('id', 'desc');
+
+        $this->layout->content = View::make('public.campaigns.manage');
+        $this->layout->content->campaigns = $campaigns->get();;
+        $this->layout->content_title = Lang::get('campaigns.manage.title');
     }
 
     /**
@@ -36,39 +39,27 @@ class CampaignsController extends BaseController {
      */
     public function showNew() {
         $categories = Category::all();
-        $this->layout->content = View::make('admin.campaigns.create');
+
+        $this->layout->content = View::make('public.campaigns.create');
         $this->layout->content->categories = $categories;
+        $this->layout->content_title = Lang::get('campaigns.new.title');
     }
 
     public function postCreate() {
 
-        $validator = Validator::make(Input::all(), Campaign::$rules );
+        $data = Input::all();
+        $data['item_vendor_id'] = Auth::user()->id;
+
+        $validator = Validator::make($data, Campaign::$rules );
 
         if( $validator->passes() ) {
 
-            $campaign = Campaign::create(
-                array(
-                    'title'                 => Input::get('title'),
-                    'description'           => Input::get('description'),
-                    'item_title'            => Input::get('item_title'),
-                    'item_vendor_id'        => Auth::user()->id,
-                    'item_description'      => Input::get('item_description'),
-                    'target_title'          => Input::get('target_title'),
-                    'target_adress_street'  => Input::get('target_adress_street'),
-                    'target_adress_street2' => Input::get('target_adress_street2'),
-                    'target_adress_zip'     => Input::get('target_adress_zip'),
-                    'target_adress_city'    => Input::get('target_adress_city'),
-                    'target_adress_country' => Input::get('target_adress_country'),
-                    'target_description'    => Input::get('target_description'),
-                    'item_price'            => Input::get('item_price', 0),
-                    'category_id'           => Input::get('category_id', 0),
-                )
-            );
+            $campaign = Campaign::create( $data );
 
-            return Redirect::back()->with('message', Lang::get('admin.campaigns.new.message', array('title' => Input::get('title'))));
+            return Redirect::back()->with('message', Lang::get('campaigns.new.message', array('title' => Input::get('title'))));
         } else {
             return Redirect::back()
-                ->with('message', Lang::get('admin.campaigns.new.error'))
+                ->with('message', Lang::get('campaigns.new.error'))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -76,20 +67,20 @@ class CampaignsController extends BaseController {
 
     public function showEdit($id) {
         $campaign = Campaign::find($id);
-
         $categories = Category::all();
-        
+
         // If no item in database
         if(empty($campaign) || empty($campaign->id))
-            return Redirect::route('admin.campaigns')
-                ->with('message', Lang::get('admin.campaigns.edit.inexistant'));
+            return Redirect::route('public.campaigns')
+                ->with('message', Lang::get('campaigns.edit.inexistant'));
 
-        if( ! ( $campaign->vendor()->first()->id == Auth::user()->id || Auth::user()->role()->first()->name_tag == 'admin' ) )
-            return Redirect::back()->with('message', Lang::get('admin.campaigns.edit.unauthorized'));
+        if( ! ( $campaign->vendor->id == Auth::user()->id || Auth::user()->role()->first()->name_tag == 'admin' ) )
+            return Redirect::back()->with('message', Lang::get('campaigns.edit.unauthorized'));
 
-        $this->layout->content = View::make('admin.campaigns.edit');
+        $this->layout->content = View::make('public.campaigns.edit');
         $this->layout->content->campaign = $campaign;
         $this->layout->content->categories = $categories;
+        $this->layout->sidebar = View::make('public.campaigns.sidebars.edit')->with('campaign', $campaign);
     }
 
     public function postUpdate($id) {
@@ -97,8 +88,11 @@ class CampaignsController extends BaseController {
 
         // If no item in database
         if(empty($campaign) || empty($campaign->id))
-            return Redirect::route('admin.campaigns')
-                ->with('message', Lang::get('admin.campaigns.edit.inexistant'));
+            return Redirect::route('public.campaigns')
+                ->with('message', Lang::get('campaigns.edit.inexistant'));
+
+        if( ! ( $campaign->vendor->id == Auth::user()->id || Auth::user()->role()->first()->name_tag == 'admin' ) )
+            return Redirect::back()->with('message', Lang::get('campaigns.edit.unauthorized'));
 
         $validator = Validator::make( Input::all(), Campaign::$rules );
 
@@ -117,14 +111,14 @@ class CampaignsController extends BaseController {
                     'target_adress_country' => Input::get('target_adress_country'),
                     'target_description'    => Input::get('target_description'),
                     'item_price'            => intval(Input::get('item_price', 0) * 100 ),
-                    'category_id'           => Input::get('category_id', 0),
+                    'category_id'           => Input::get('category_id'),
                 )
             )->save();
 
-            return Redirect::back()->with('message', Lang::get('admin.campaigns.edit.message', array('title' => Input::get('title'))));
+            return Redirect::back()->with('message', Lang::get('campaigns.edit.message', array('title' => Input::get('title'))));
         } else {
             return Redirect::back()
-                ->with('message', Lang::get('admin.campaigns.edit.error'))
+                ->with('message', Lang::get('campaigns.edit.error'))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -135,15 +129,18 @@ class CampaignsController extends BaseController {
 
         // If no item in database
         if(empty($campaign) || empty($campaign->id))
-            return Redirect::route('admin.campaigns')
-                ->with('message', Lang::get('admin.campaigns.edit.inexistant'));
+            return Redirect::route('public.campaigns')
+                ->with('message', Lang::get('campaigns.edit.inexistant'));
+
+        if( ! ( $campaign->vendor->id == Auth::user()->id || Auth::user()->role()->first()->name_tag == 'admin' ) )
+            return Redirect::back()->with('message', Lang::get('public.campaigns.delete.unauthorized'));
 
         try {
             $campaign->delete();
         } catch(Exception $e){
-            return Redirect::back()->with('message', Lang::get('admin.campaigns.delete.error'))->withInput();
+            return Redirect::back()->with('message', Lang::get('campaigns.delete.error'))->withInput();
         }
 
-        return Redirect::route('admin.campaigns')->with('message', Lang::get('admin.campaigns.delete.message', array('title' => Input::get('title'))));
+        return Redirect::back()->with('message', Lang::get('campaigns.delete.message', array('title' => Input::get('title'))));
     }
 }
