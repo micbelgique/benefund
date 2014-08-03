@@ -17,7 +17,7 @@ Route::group(array('before' => 'auth'), function() {
 
 
     Route::get('/campaigns/manage', array('as' => 'public.campaigns.manage', 'uses' => 'CampaignsController@showManage'));
-    Route::post('/campaigns/{id}/pledges/add', array('as' => 'public.campaigns.pledges.create', 'uses' => 'Campaign\PledgeController@postCreate'));
+    Route::post('/campaigns/{id}/pledges/add', array('as' => 'public.campaigns.pledges.create', 'uses' => 'Campaigns\PledgesController@postCreate'));
 });
 
 Route::get('/login', array('as' => 'login', 'uses' => 'AuthController@showIndex'));

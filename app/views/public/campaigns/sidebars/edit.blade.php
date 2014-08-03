@@ -32,24 +32,48 @@
                 <th colspan="2">Title</th>
             </tr>
             <tr>
-                <td colspan="2"><input type="text" class="pledge_title form-control"></td>
+                <td colspan="2">
+                    <input type="text" name="title" id="pledge_title" class="form-control {{ 'create_pledge' == Input::get('action', '') && $errors->has('title') ? 'has-error has-feedback' : '' }}" value="{{ 'create_pledge' == Input::get('action', '') ? Input::old('title', '') : '' }}">
+                    @if( 'create_pledge' == Input::get('action', '') && $errors->has('title' ) )
+                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span class="help-block">{{ $errors->first('title') }}</span>
+                    @endif
+                </td>
             </tr>
             <tr>
                 <th colspan="2">Description</th>
             </tr>
             <tr>
-                <td colspan="2"><textarea class="pledge_description form-control"></textarea></td>
+                <td colspan="2">
+                    <textarea name="description" id="pledge_description" class="form-control {{ 'create_pledge' == Input::get('action', '') && $errors->has('description') ? 'has-error has-feedback' : '' }}">{{ 'create_pledge' == Input::get('action', '') ? Input::old('description', '') : '' }}</textarea>
+                    @if( 'create_pledge' == Input::get('action', '') && $errors->has('description' ) )
+                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span class="help-block">{{ $errors->first('description') }}</span>
+                    @endif
+                </td>
             </tr>
             <tr>
                 <th>Price Min</th>
                 <th>Price Max</th>
             </tr>
             <tr>
-                <td><input type="text" class="pledge_price_min form-control"></td>
-                <td><input type="text" class="pledge_price_max form-control"></td>
+                <td>
+                    <input type="text" name="price_min" id="pledge_price_min" class="form-control {{ 'create_pledge' == Input::get('action', '') && $errors->has('price_min') ? 'has-error has-feedback' : '' }}" value="{{ 'create_pledge' == Input::get('action', '') ? Input::old('price_min', '') : '' }}">
+                    @if( 'create_pledge' == Input::get('action', '') && $errors->has('price_min' ) )
+                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span class="help-block">{{ $errors->first('price_min') }}</span>
+                    @endif
+                </td>
+                <td>
+                    <input type="text" name="price_max" id="pledge_price_max" class="form-control {{ 'create_pledge' == Input::get('action', '') && $errors->has('price_max') ? 'has-error has-feedback' : '' }}" value="{{ 'create_pledge' == Input::get('action', '') ? Input::old('price_max', '') : '' }}">
+                    @if( 'create_pledge' == Input::get('action', '') && $errors->has('price_max' ) )
+                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span class="help-block">{{ $errors->first('price_max') }}</span>
+                    @endif
+                </td>
             </tr>
             <tr>
-                <td colspan="2"><button class="btn btn-success btn-block"><i class="glyphicon glyphicon-yes"></i> Save new pledge</button></td>
+                <td colspan="2"><button type="submit" class="btn btn-success btn-block" name="action" value="create_pledge"><i class="glyphicon glyphicon-yes"></i> @lang('pledges.buttons.add')</button></td>
             </tr>
             </form>
         </tfoot>
