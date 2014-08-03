@@ -87,7 +87,7 @@ $(function(){
                     } else if( response.status == 'success' ) {
                         $('.modal').modal('hide');
                         // $this.button('reset');
-                        reload_pledges( response.status.pledges_url );
+                        reload_pledges( response.pledges_url );
                     }
                 }
             });
@@ -95,5 +95,5 @@ $(function(){
     }
 });
 function reload_pledges( pledges_url ) {
-    $('#pledges-list').empty().load( pledges_url );
+    $('#pledges-list tbody').empty().load( pledges_url );
 }

@@ -102,8 +102,9 @@ class CampaignsController extends BaseController {
     }
 
     public function showEdit($id) {
-        $campaign = Campaign::find($id);
+        $campaign   = Campaign::find($id);
         $categories = Category::all();
+        $pledges    = Campaign\Pledge::where('campaign_id', $campaign->id)->orderBy('price_min', 'asc')->get();
 
         // If no item in database
         if(empty($campaign) || empty($campaign->id))
@@ -116,7 +117,7 @@ class CampaignsController extends BaseController {
         $this->layout->content = View::make('public.campaigns.edit');
         $this->layout->content->campaign = $campaign;
         $this->layout->content->categories = $categories;
-        $this->layout->sidebar = View::make('public.campaigns.sidebars.edit')->with('campaign', $campaign);
+        $this->layout->sidebar = View::make('public.campaigns.sidebars.edit')->with('campaign', $campaign)->with('pledges', $pledges);
     }
 
     public function postUpdate($id) {

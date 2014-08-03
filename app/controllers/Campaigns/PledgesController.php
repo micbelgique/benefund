@@ -7,14 +7,11 @@ use \View, \Campaign, \Category, \Lang, \Validator, \Input, \Redirect, \Auth, \C
 class PledgesController extends \BaseController {
 
     public function showList($id) {
-        $pledges = Campaign\Pledge::where('campaign_id', $id)->orderBy('price_min', 'asc');
+        $pledges = Campaign\Pledge::where('campaign_id', $id)->orderBy('price_min', 'asc')->get();
 
-        $response = '';
         if( 0 < count( $pledges ) )
             foreach( $pledges as $pledge )
-                $response .= View::make('public.campaigns.pledges.item')->with('pledge', $pledge);
-
-        return $response;
+                echo View::make('public.campaigns.pledges.item')->with('pledge', $pledge);
     }
 
     public function postCreate($id) {
