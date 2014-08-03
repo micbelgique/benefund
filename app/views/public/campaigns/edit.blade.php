@@ -5,7 +5,7 @@
 </div>
 @endif
 
-<form action="{{ URL::route('public.campaigns.update', ['id' => $campaign->id]) }}" method="post">
+<form action="{{ URL::route('public.campaigns.update', ['id' => $campaign->id]) }}" method="post"  enctype="multipart/form-data">
     <h4>@lang('campaigns.form.labels.introduction')</h4>
     <div class="row">
         <div class="col-md-12">
@@ -26,6 +26,30 @@
                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                 <span class="help-block">{{ $errors->first('description') }}</span>
                 @endif
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-2">
+                    <img class="thumbnail" src="{{ $campaign->get_thumb(64, 64) }}">
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="thumb">@lang('admin/campaigns.form.labels.thumb')</label>
+                        <input type="file" accept="image/png, image/jpeg, image/gif" name="thumb"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="cover">@lang('admin/campaigns.form.labels.cover')</label>
+                        <input type="file" accept="image/png, image/jpeg, image/gif" name="cover"/>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <img class="thumbnail" src="{{ $campaign->get_cover(740, 263) }}">
+                </div>
             </div>
         </div>
         <div class="col-md-4">

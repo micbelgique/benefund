@@ -7,7 +7,7 @@
 </div>
 @endif
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-12">
             <div class="form-group {{ $errors->has('title') ? 'has-error has-feedback' : '' }}">
@@ -24,6 +24,28 @@
                 <label for="description">@lang('admin/categories.form.labels.description')</label>
                 <textarea class="form-control summernote" name="description" id="description" rows="15">{{ Input::old('description', $category->description) }}</textarea>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <img class="thumbnail" src="{{ $category->get_thumb(64, 64) }}">
+        </div>
+        <div class="col-md-11">
+            <div class="form-group">
+                <label for="thumb">@lang('admin/categories.form.labels.thumb')</label>
+                <input type="file" accept="image/png, image/jpeg, image/gif" name="thumb"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="cover">@lang('admin/categories.form.labels.cover')</label>
+                <input type="file" accept="image/png, image/jpeg, image/gif" name="cover"/>
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+            <img class="thumbnail" src="{{ $category->get_cover(1000, 300) }}">
         </div>
     </div>
     {{ Form::token() }}

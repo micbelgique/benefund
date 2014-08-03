@@ -21,4 +21,14 @@ class Category extends Eloquent {
 	 * 
 	 */
 	protected $fillable = array('title', 'description');
+
+	public function get_cover($width = 1000, $height = 300) {
+		$file_url = 'uploads/categories/covers/' . $this->id . '.png';
+		return ( File::exists( $file_url ) ) ? asset(Croppa::url( $file_url, $width, $height )) : 'http://placehold.it/' . $width . 'x' . $height;
+	}
+
+	public function get_thumb($width = 64, $height = 64) {
+		$file_url = 'uploads/categories/thumbs/' . $this->id . '.png';
+		return ( File::exists( $file_url ) ) ? asset(Croppa::url( $file_url, $width, $height )) : 'http://placehold.it/' . $width . 'x' . $height;
+	}
 }

@@ -43,7 +43,46 @@ class CategoriesController extends BaseController {
         		)
         	);
 
-            return Redirect::route('admin.categories')->with('message', Lang::get('admin/categories.new.message', array('title' => Input::get('title'))));
+            $cover = Input::file('cover', null);
+            if( null !== $cover ) {
+                $destination_path = 'uploads/categories/covers';
+                $file_name = $category->id;
+
+                $path_parts = explode('.', $cover->getClientOriginalName() );
+                $ext = $path_parts[count($path_parts) - 1];
+
+                $cover_passes = Input::file('cover')->move($destination_path, $file_name . '.png');
+            } else {
+                $cover_passes = true;
+            }
+
+            if(!$cover_passes){
+                return Redirect::back()
+                    ->with('message', Lang::get('admin/categories.cover.bad_upload_error'))
+                    ->withInput();
+            }
+
+            $thumb = Input::file('thumb', null);
+            if( null !== $thumb ) {
+                $destination_path = 'uploads/categories/thumbs';
+                $file_name = $category->id;
+
+                $path_parts = explode('.', $thumb->getClientOriginalName() );
+                $ext = $path_parts[count($path_parts) - 1];
+
+                $thumb_passes = Input::file('thumb')->move($destination_path, $file_name . '.png');
+            } else {
+                $thumb_passes = true;
+            }
+
+            if(!$thumb_passes){
+                return Redirect::back()
+                    ->with('message', Lang::get('admin/categories.thumb.bad_upload_error'))
+                    ->withInput();
+            }
+
+            return Redirect::route('admin.categories')
+                ->with('message', Lang::get('admin/categories.new.message', array('title' => Input::get('title'))));
         } else {
             return Redirect::back()
                 ->with('message', Lang::get('admin/categories.new.error'))
@@ -93,6 +132,44 @@ class CategoriesController extends BaseController {
         		)
         	)->save();
 
+            $cover = Input::file('cover', null);
+            if( null !== $cover ) {
+                $destination_path = 'uploads/categories/covers';
+                $file_name = $category->id;
+
+                $path_parts = explode('.', $cover->getClientOriginalName() );
+                $ext = $path_parts[count($path_parts) - 1];
+
+                $cover_passes = Input::file('cover')->move($destination_path, $file_name . '.png');
+            } else {
+                $cover_passes = true;
+            }
+
+            if(is_bool($cover_passes) && $cover_passes == false){
+                return Redirect::back()
+                    ->with('message', Lang::get('admin/categories.cover.bad_upload_error'))
+                    ->withInput();
+            }
+
+            $thumb = Input::file('thumb', null);
+            if( null !== $thumb ) {
+                $destination_path = 'uploads/categories/thumbs';
+                $file_name = $category->id;
+
+                $path_parts = explode('.', $thumb->getClientOriginalName() );
+                $ext = $path_parts[count($path_parts) - 1];
+
+                $thumb_passes = Input::file('thumb')->move($destination_path, $file_name . '.png');
+            } else {
+                $thumb_passes = true;
+            }
+
+            if(is_bool($thumb_passes) && $thumb_passes == false){
+                return Redirect::back()
+                    ->with('message', Lang::get('admin/categories.thumb.bad_upload_error'))
+                    ->withInput();
+            }
+
             return Redirect::route('admin.categories')->with('message', Lang::get('admin/categories.update.message', array('title' => Input::get('title'))));
         } else {
             return Redirect::back()
@@ -116,6 +193,8 @@ class CategoriesController extends BaseController {
 
         try {
 			$category->delete();
+            Croppa::delete('uploads/categories/thumbs/' . $id . '.png');
+            Croppa::delete('uploads/categories/covers/' . $id . '.png');
 		} catch(Exception $e){
 			return Redirect::back()->with('message', Lang::get('admin/categories.new.error_delete'))->withInput();
 		}

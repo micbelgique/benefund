@@ -46,11 +46,49 @@ class CampaignsController extends BaseController {
         $data = Input::all();
         $data['item_vendor_id'] = Auth::user()->id;
 
-        $validator = Validator::make($data, Campaign::$rules );
+        $validator = Validator::make( $data, Campaign::$rules );
 
         if( $validator->passes() ) {
 
             $campaign = Campaign::create( $data );
+
+            $cover = Input::file('cover', null);
+            if( null !== $cover ) {
+                $destination_path = 'uploads/campaigns/covers';
+                $file_name = $category->id;
+
+                $path_parts = explode('.', $cover->getClientOriginalName() );
+                $ext = $path_parts[count($path_parts) - 1];
+
+                $cover_passes = Input::file('cover')->move($destination_path, $file_name . '.png');
+            } else {
+                $cover_passes = true;
+            }
+
+            if(!$cover_passes){
+                return Redirect::back()
+                    ->with('message', Lang::get('admin/campaigns.cover.bad_upload_error'))
+                    ->withInput();
+            }
+
+            $thumb = Input::file('thumb', null);
+            if( null !== $thumb ) {
+                $destination_path = 'uploads/campaigns/thumbs';
+                $file_name = $category->id;
+
+                $path_parts = explode('.', $thumb->getClientOriginalName() );
+                $ext = $path_parts[count($path_parts) - 1];
+
+                $thumb_passes = Input::file('thumb')->move($destination_path, $file_name . '.png');
+            } else {
+                $thumb_passes = true;
+            }
+
+            if(!$thumb_passes){
+                return Redirect::back()
+                    ->with('message', Lang::get('admin/campaigns.thumb.bad_upload_error'))
+                    ->withInput();
+            }
 
             return Redirect::back()->with('message', Lang::get('campaigns.new.message', array('title' => Input::get('title'))));
         } else {

@@ -8,7 +8,7 @@
         <a href="{{ URL::route('public.categories.details', [ 'id' => $category->id ]) }}" class="list-group-item">
             <div class="media">
                 <div class="pull-left">
-                    <img class="media-object" src="http://placehold.it/64x64" alt="{{ $category->title }}">
+                    <img class="media-object" src="{{ $category->get_thumb(64, 64) }}" alt="{{ $category->title }}">
                 </div>
                 <div class="media-body">
                     <h4 class="list-group-item-heading">{{ $category->title }}</h4>
