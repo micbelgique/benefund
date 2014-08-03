@@ -38,7 +38,11 @@
                 {{ $content }}
             </div>
             <div class="col-md-4">
-                @include('public.parts.sidebar')
+            @if( is_null( $sidebar ) )
+                @include( 'public.parts.sidebar' )
+            @else
+                {{ $sidebar }}
+            @endif
             </div>
         </div>
     </div>

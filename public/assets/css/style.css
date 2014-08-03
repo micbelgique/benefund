@@ -28,7 +28,7 @@ body {
   font-size: 87px;
 }
 
-img {
+img, textarea {
   max-width: 99%;
 }
 
@@ -62,4 +62,54 @@ img {
 }
 .close-preview:hover {
   color: #222;
+}
+
+.navbar-brand {
+  margin: 0;
+  padding: 10px;
+}
+
+a {
+  color: #5dbef4;
+}
+
+a:hover, a:focus {
+  color: #2eabf0;
+}
+
+.navbar-inverse {
+  background-color: #293335;
+  border-top: 4px solid #8dd1f7;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus,
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  background-color: #8dd1f7;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+  color: #8dd1f7;
+}
+
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+  color: #8dd1f7;
+}
+
+.thumbnail img {
+  border-top: 4px solid #8dd1f7;
+}
+
+.panel-default > .panel-heading {
+  background-color: #293335;
+  color: #fff;
+}
+
+a.list-group-item .list-group-item-heading {
+  color: #5dbef4;
 }

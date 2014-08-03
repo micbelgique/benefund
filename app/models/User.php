@@ -40,7 +40,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function get_avatar_url() {
 		$avatar_url = 'uploads/avatars/' . $this->id . '.png';
 		if( File::exists( $avatar_url ) ) {
-			return $avatar_url;
+			return asset( $avatar_url );
 		}
 		return false;
 	}

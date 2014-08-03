@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-info">
   <div class="panel-heading">@lang('sidebar.categories.title')</div>
   <div class="panel-body">
     <p>@lang('sidebar.categories.title')</p>

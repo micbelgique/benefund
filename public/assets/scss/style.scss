@@ -28,7 +28,7 @@ body {
     font-size: 87px;
 }
 
-img {
+img, textarea {
     max-width: 99%;
 }
 
@@ -64,3 +64,60 @@ img {
         color: #222;
     }
 }
+
+.navbar-brand {
+    margin: 0;
+    padding: 10px;
+}
+
+$benefund-black: #0f0f0f;
+$benefund-black: #293335;
+$benefund-dark-blue: #8dd1f7;
+$benefund-light-blue: #92d8f7;
+$benefund-link: darken($benefund-dark-blue, 10%);
+
+a {
+    color: $benefund-link;
+}
+
+a:hover, a:focus {
+    color: darken($benefund-link, 10%);
+}
+
+.navbar-inverse {
+    background-color: $benefund-black;
+    border-top: 4px solid $benefund-dark-blue
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus,
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: $benefund-dark-blue;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+    color: $benefund-dark-blue;
+}
+
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+    color: $benefund-dark-blue;
+}
+
+.thumbnail img {
+    border-top: 4px solid $benefund-dark-blue;
+}
+
+.panel-default > .panel-heading {
+    background-color: $benefund-black;
+    color: #fff;
+}
+
+a.list-group-item .list-group-item-heading {
+    color: $benefund-link;
+}
+

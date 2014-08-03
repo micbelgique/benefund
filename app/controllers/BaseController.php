@@ -10,7 +10,7 @@ class BaseController extends Controller {
         '/assets/js/summernote.min.js',
         '/assets/js/main.js',
     );
-	
+
 	protected $inline_js = '';
 
 	/**
@@ -28,7 +28,8 @@ class BaseController extends Controller {
 			    ->with('scripts', $this->scripts)
 			    ->with('content_title', '')
 			    ->with('categories', $categories)
-			    ->with('inline_js', $this->inline_js);
+			    ->with('inline_js', $this->inline_js)
+                ->with('sidebar', null);
 		}
 	}
 

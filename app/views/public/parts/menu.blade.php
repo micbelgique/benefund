@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ URL::route('home') }}">@lang('menu.brand')</a>
+            <a class="navbar-brand" href="{{ URL::route('home') }}"><img src="{{ asset('assets/images/logo_benefund-01.png') }}" alt="" height="40px"></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">

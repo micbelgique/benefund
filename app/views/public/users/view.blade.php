@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-md-4">
         <p class="text-center">
-        {{ $user->get_avatar_url() ? '<img src="' . asset( $user->get_avatar_url() ) . '?v=' . time() . '" alt="Avatar" class="img-circle">' : '<span class="glyphicon glyphicon-user icon-size"></span>' }}
+        {{ $user->get_avatar_url() ? '<img src="' . $user->get_avatar_url() . '?v=' . time() . '" alt="Avatar" class="img-circle">' : '<span class="glyphicon glyphicon-user icon-size"></span>' }}
         </p>
     </div>
     <div class="col-md-8">

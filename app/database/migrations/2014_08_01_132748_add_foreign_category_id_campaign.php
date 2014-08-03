@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCategoryIdCampaign extends Migration {
+class AddForeignCategoryIdCampaign extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,10 +13,7 @@ class AddCategoryIdCampaign extends Migration {
 	public function up()
 	{
 		Schema::table('campaigns', function($table) {
-			if (!Schema::hasColumn('campaigns', 'category_id')) {
-				$table->integer('category_id')->unsigned();
-				$table->foreign('category_id')->references('id')->on('categories');
-			}
+			$table->foreign('category_id')->references('id')->on('categories');
 		});
 	}
 
@@ -27,8 +24,8 @@ class AddCategoryIdCampaign extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('campaign', function($table) {
-			$table->dropColumn('category_id');
+		Schema::table('campaigns', function($table) {
+			$table->dropForeign('category_id');
 		});
 	}
 

@@ -15,4 +15,4 @@ Route::get('/admin/campaigns/create', array('as' => 'admin.campaigns.new', 'uses
 Route::post('/admin/campaigns/create', array('as' => 'admin.campaigns.create', 'uses' => 'Admin\CampaignsController@postCreate'));
 Route::get('/admin/campaigns/{id}/edit', array('as' => 'admin.campaigns.edit', 'uses' => 'Admin\CampaignsController@showEdit'));
 Route::post('/admin/campaigns/{id}/edit', array('as' => 'admin.campaigns.update', 'uses' => 'Admin\CampaignsController@postUpdate'));
-Route::post('/cadmin/ampaigns/{id}/delete', array('as' => 'admin.campaigns.delete', 'uses' => 'Admin\CampaignsController@postDelete'));
+Route::post('/admin/campaigns/{id}/delete', array('as' => 'admin.campaigns.delete', 'uses' => 'Admin\CampaignsController@postDelete'));
