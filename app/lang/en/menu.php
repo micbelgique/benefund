@@ -16,5 +16,9 @@ return array(
     	'dropdown' => 'Campaigns',
     	'new' => 'Add a campaign',
     	'manage' => 'Manage'
-	)
+	),
+
+    'about' => array(
+        'dropdown' => 'About'
+    )
 );
