@@ -6,9 +6,10 @@ use \View, \Campaign, \Category, \Lang, \Validator, \Input, \Redirect, \Auth, \C
 
 class PledgesController extends \BaseController {
 
-    public function postCreate() {
+    public function postCreate($id) {
 
         $data = Input::all();
+        $data['campaign_id'] = $id;
 
         $validator = Validator::make($data, Campaign\Pledge::$rules );
 
@@ -18,7 +19,6 @@ class PledgesController extends \BaseController {
 
             return Redirect::back()->with('message', Lang::get('admin.pledges.new.message'));
         } else {
-            Input::flash();
             return Redirect::back()
                 ->with('message', Lang::get('admin.pledges.new.error'))
                 ->withErrors($validator)
