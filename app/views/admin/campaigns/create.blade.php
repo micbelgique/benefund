@@ -5,7 +5,7 @@
 </div>
 @endif
 
-<form action="{{ URL::route('public.campaigns.create') }}" method="post">
+<form action="{{ URL::route('admin.campaigns.create') }}" method="post">
     <h4>@lang('campaigns.form.labels.introduction')</h4>
     <div class="row">
         <div class="col-md-12">

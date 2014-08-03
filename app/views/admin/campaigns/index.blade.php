@@ -1,5 +1,3 @@
-<h2 class="campaign-header">@lang('admin/campaigns.title')</h2>
-
 @if( Session::has('message') )
 <div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif
@@ -8,7 +6,7 @@
     <div class="col-xs-12">
         @if( Input::get('s', '') != '' )
         <div class="pull-left">
-            <h4>@lang('admin/campaigns.search.title', [ 'search' => Input::get('s') ])</h4>
+            <h4>@lang('campaigns.search.title', [ 'search' => Input::get('s') ])</h4>
         </div>
         @endif
     </div>
@@ -17,15 +15,15 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="pull-left">
-            <p><a href="{{ URL::route('admin.campaigns.new') }}" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> @lang('admin/campaigns.form.buttons.new')</a></p>
+            <p><a href="{{ URL::route('admin.campaigns.new') }}" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> @lang('campaigns.form.buttons.new')</a></p>
         </div>
         <div class="pull-right">
             <p>
-                <form action="{{ URL::route('admin.campaigns') }}" type="get" class="form-inline">
+                <form action="{{ URL::route('admin.campaigns.manage') }}" type="get" class="form-inline">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="s" id="s" placeholder="@lang('admin/campaigns.form.search.placeholder')" value="{{ Input::get('s', '') }}">
+                        <input type="text" class="form-control" name="s" id="s" placeholder="@lang('campaigns.form.search.placeholder')" value="{{ Input::get('s', '') }}">
                         <span class="input-group-btn">
-                            <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> @lang('admin/campaigns.form.search.button')</button>
+                            <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> @lang('campaigns.form.search.button')</button>
                         </span>
                     </div>
                 </form>
@@ -34,31 +32,35 @@
     </div>
 </div>
 
-<table id="campaigns" class="table table-striped table-hover table-bordered">
-    <thead>
-        <tr>
-            <th>@lang('admin/campaigns.title')</th>
-            <th>@lang('app.actions')</th>
-        </tr>
-    </thead>
+<table id="campaigns" class="table table-bordered">
     <tbody>
     @if( count( $campaigns ) > 0 )
-        @foreach( $campaigns as $index => $campaign )
-        <tr id="campaign-{{ $campaign->id }}">
+    @foreach( $campaigns as $campaign )
+        <tr>
+            <th>@lang('campaigns.manage.table.title')</th>
             <td>{{ $campaign->title }}</td>
-            <td>
+        </tr>
+        <tr>
+            <td colspan="2">{{ $campaign->description }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">
                 <form action="{{ URL::route('admin.campaigns.delete', [$campaign->id]) }}" method="post">
-                    <div class="btn-group btn-group-block">
-                        <a href="{{ URL::route('admin.campaigns.edit', [$campaign->id]) }}" class="btn btn-primary btn-sm btn-col-4"><i class="glyphicon glyphicon-edit"></i> <span class="hidden-xs">@lang('admin/campaigns.form.buttons.edit')</span></a>
-                        <button class="btn btn-danger btn-sm btn-col-4"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs">@lang('admin/campaigns.form.buttons.remove')</span></button>
+                    <div class="btn-group btn-group-justified">
+                        <div class="btn-group">
+                            <a href="{{ URL::route('admin.campaigns.edit', [ 'id' => $campaign->id ]) }}" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> @lang('campaigns.buttons.edit')</a>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> @lang('campaigns.buttons.delete')</button>
+                        </div>
                     </div>
                 </form>
             </td>
         </tr>
-        @endforeach
+    @endforeach
     @else
         <tr class="danger">
-            <td colspan="3">@lang('admin/campaigns.empty')</td>
+            <td>@lang('campaigns.empty')</td>
         </tr>
     @endif
     </tbody>
@@ -67,7 +69,7 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="pull-left">
-            <p><a href="{{ URL::route('admin.campaigns.new') }}" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> @lang('admin/campaigns.form.buttons.new')</a></p>
+            <p><a href="{{ URL::route('admin.campaigns.new') }}" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> @lang('campaigns.form.buttons.new')</a></p>
         </div>
     </div>
 </div>
