@@ -86,13 +86,42 @@ $(function(){
                         $this.button('reset');
                     } else if( response.status == 'success' ) {
                         $('.modal').modal('hide');
-                        // $this.button('reset');
                         reload_pledges( response.pledges_url );
                     }
                 }
             });
         });
     }
+
+    $(document).on('click', '.pledge-fund', function(e) {
+        e.preventDefault();
+
+        var $this = $(this),
+            modal_url = $this.attr('href'),
+            $pledge_modal = $('#pledge-modal');
+
+        $pledge_modal.find('.modal-content').load(modal_url, function() {
+            $pledge_modal.modal('show');
+        });
+    });
+
+    $(document).on('click', '.pledge-buy', function(e) {
+        e.preventDefault();
+
+        var $this = $(this),
+            $pledge_modal = $('#pledge-modal');
+
+        $this.button('loading');
+
+        $.ajax({
+            url: $this.attr('href'),
+            type: 'post',
+            success: function(response) {
+                console.log(response);
+                $pledge_modal.find('.modal-content').load(response.view_url);
+            }
+        });
+    });
 });
 function reload_pledges( pledges_url ) {
     $('#pledges-list tbody').empty().load( pledges_url );
