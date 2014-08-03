@@ -28,9 +28,9 @@ class Pledge extends Eloquent {
     public static $rules = array(
         'title'       => 'required|min:3',
         'campaign_id' => 'required|exists:campaigns,id',
-        'price_min'   => 'numeric',
-        'price_max'   => 'numeric',
-        'quantity'    => 'integer|min:1'
+        'price_min'   => 'numeric|min:0',
+        'price_max'   => 'numeric|min:0',
+        'quantity'    => 'integer|min:0'
     );
 
     public function campaign() {
