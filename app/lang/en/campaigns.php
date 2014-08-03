@@ -24,7 +24,7 @@ return array(
 			'item_price' => 'Price',
 			'item_price' => 'Price',
 			'target_title' => 'Name',
-			'target_adress_street' => 'Adress',
+			'target_adress_street' => 'Destination address',
 			'target_adress_street2' => '',
 			'target_adress_zip' => 'City code',
 			'target_adress_city' => 'City',
@@ -110,7 +110,7 @@ return array(
 
 	'details' => array(
 		'vendor' => 'Vendor',
-		'address' => 'Address',
+		'address' => 'Destination address',
 		'geolocation' => 'Location'
 	),
 
