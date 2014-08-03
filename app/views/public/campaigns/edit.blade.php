@@ -164,6 +164,6 @@
         </div>
     </div>
     {{ Form::token() }}
-    <button class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> @lang('campaigns.form.new.submit')</button>
+    <button class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> @lang('campaigns.form.edit.submit')</button>
     <button type="reset" class="btn">@lang('app.reset')</button>
 </form>

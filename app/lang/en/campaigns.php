@@ -89,6 +89,7 @@ return array(
 
 	'edit' => array(
 		'title' => 'Campaign edit',
+		'error' => 'Some erros have been detected',
 		'message' => 'The campaign has been edited',
 		'unauthorized' => 'You can\'t edit this campaign'
 	),
