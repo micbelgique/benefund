@@ -33,7 +33,9 @@ return array(
 			'recipient' => 'Recipient',
 			'item' => 'Item',
 			'category' => 'Category',
-			'introduction' => 'Introduction'
+			'introduction' => 'Introduction',
+			'thumb' => 'Thumbnail',
+			'cover' => 'Cover'
 		),
 		'placeholders' => array(
 			'title' => 'Campaign\'s title',
@@ -100,7 +102,10 @@ return array(
 
 	'pledges' => array(
 		'title' => 'Pledges',
-		'empty' => 'No pledges'
+		'empty' => 'No pledges',
+		'buttons' => array(
+			'add' => 'Ajouter'
+		)
 	),
 
 	'details' => array(
@@ -110,7 +115,8 @@ return array(
 	),
 
 	'buttons' => array(
-		'edit' => 'Edit'
+		'edit' => 'Edit',
+		'delete' => 'Delete'
 	),
 
 	'sidebar' => array(

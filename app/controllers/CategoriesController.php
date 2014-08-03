@@ -12,7 +12,7 @@ class CategoriesController extends BaseController {
             return Redirect::route('home')
                 ->with('message', Lang::get('admin/categories.inexistant'));
 
-	    $campaigns = Campaign::where('category_id', '=', $id);
+	    $campaigns = Campaign::where('category_id', '=', $id)->get();
 
         $this->layout->content = View::make('public.categories.details');
         $this->layout->content->category = $category;
