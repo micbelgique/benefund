@@ -2,14 +2,24 @@
 
 namespace Campaigns;
 
-use \View, \Campaign, \Category, \Lang, \Validator, \Input, \Redirect, \Auth, \Campaign\Pledge;
+use \View, \Campaign, \Category, \Lang, \Validator, \Input, \Redirect, \Auth, \Campaign\Pledge, \Response, \URL;
 
 class PledgesController extends \BaseController {
+
+    public function showList($id) {
+        $pledges = Campaign\Pledge::where('campaign_id', $id)->orderBy('price_min', 'asc')->get();
+
+        if( 0 < count( $pledges ) )
+            foreach( $pledges as $pledge )
+                echo View::make('public.campaigns.pledges.item')->with('pledge', $pledge);
+    }
 
     public function postCreate($id) {
 
         $data = Input::all();
         $data['campaign_id'] = $id;
+        $data['price_min'] = intval($data['price_min']*100);
+        $data['price_max'] = intval($data['price_max']*100);
 
         $validator = Validator::make($data, Campaign\Pledge::$rules );
 
@@ -26,6 +36,16 @@ class PledgesController extends \BaseController {
         }
     }
 
+    public function showEdit($id) {
+        $pledge = Campaign\Pledge::find($id);
+
+        // If no item in database
+        if(empty($pledge) || empty($pledge->id))
+            return Redirect::back()->with('message', Lang::get('admin.pledges.edit.inexistant'));
+
+        return View::make('public.campaigns.pledges.edit')->with('pledge', $pledge);
+    }
+
     public function postUpdate($id) {
         $pledge = Campaign\Pledge::find($id);
 
@@ -34,18 +54,16 @@ class PledgesController extends \BaseController {
             return Redirect::back()->with('message', Lang::get('admin.pledges.edit.inexistant'));
 
         $data = Input::all();
+        $data['campaign_id'] = $pledge->campaign_id;
 
         $validator = Validator::make( $data, Campaign\Pledge::$rules );
 
         if( $validator->passes() ) {
-            $campaign->fill( $data )->save();
+            $pledge->fill( $data )->save();
 
-            return Redirect::back()->with('message', Lang::get('admin.pledges.edit.message'));
+            return Response::json(array('status' => 'success', 'pledges_url' => URL::route('public.campaigns.pledges', [ 'id' => $pledge->campaign_id ])));
         } else {
-            return Redirect::back()
-                ->with('message', Lang::get('admin.pledges.edit.error'))
-                ->withErrors($validator)
-                ->withInput();
+            return Response::json(array('status' => 'fail', 'errors' => $validator->errors()));
         }
     }
 
