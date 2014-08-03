@@ -12,14 +12,21 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ URL::route('home') }}">@lang('menu.home')</a></li>
-                <li><a href="{{ URL::route('public.campaigns.new') }}">@lang('menu.campaigns.new')</a></li>
-                @if( ! Auth::check() )
-                <li><a href="{{ URL::route('login') }}">@lang('menu.login')</a></li>
-                <li><a href="{{ URL::route('register') }}">@lang('menu.register')</a></li>
+                @if( Auth::check() )
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <strong>@lang('menu.campaigns.dropdown')</strong>
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ URL::route('public.campaigns.new') }}">@lang('menu.campaigns.new')</a></li>
+                        <li><a href="{{ URL::route('public.campaigns.manage') }}">@lang('menu.campaigns.manage')</a></li>
+                    </ul>
+                </li>
                 @endif
             </ul>
-            @if( Auth::check() )
             <ul class="nav navbar-nav navbar-right">
+                @if( Auth::check() )
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-user"></span> 
@@ -64,8 +71,11 @@
                         </li>
                     </ul>
                 </li>
+                @else
+                <li><a href="{{ URL::route('login') }}">@lang('menu.login')</a></li>
+                <li><a href="{{ URL::route('register') }}">@lang('menu.register')</a></li>
+                @endif
             </ul>
-            @endif
         </div>
     </div>
 </div>
