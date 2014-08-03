@@ -131,5 +131,9 @@ return array(
 		'table' => array(
 			'title' => 'Campaign title'
 		)
+	),
+
+	'search' => array(
+			'title' => 'Researched campaigns'
 	)
 );
