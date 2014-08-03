@@ -17,7 +17,10 @@ Route::group(array('before' => 'auth'), function() {
 
 
     Route::get('/campaigns/manage', array('as' => 'public.campaigns.manage', 'uses' => 'CampaignsController@showManage'));
+    Route::get('/campaigns/{id}/pledges', array('as' => 'public.campaigns.pledges', 'uses' => 'Campaigns\PledgesController@showList'));
     Route::post('/campaigns/{id}/pledges/add', array('as' => 'public.campaigns.pledges.create', 'uses' => 'Campaigns\PledgesController@postCreate'));
+    Route::get('/pledges/{id}/edit', array('as' => 'public.pledges.edit', 'uses' => 'Campaigns\PledgesController@showEdit'));
+    Route::post('/pledges/{id}/edit', array('as' => 'public.pledges.update', 'uses' => 'Campaigns\PledgesController@postUpdate'));
 });
 
 Route::get('/login', array('as' => 'login', 'uses' => 'AuthController@showIndex'));
