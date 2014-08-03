@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="thumbnail">
-            <img src="{{ $campaign->get_image('banner') }}" alt="@lang('campaigns.view.invite', ['name'=>$campaign->title])">
+            <img src="{{ $campaign->get_cover(740, 263) }}" alt="@lang('campaigns.view.invite', ['name'=>$campaign->title])">
             <div class="caption">
                 <div style="height: 100px">{{ $campaign->description }}</div>
                 <div class="row">
