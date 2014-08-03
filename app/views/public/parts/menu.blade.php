@@ -21,6 +21,25 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="{{ URL::route('public.campaigns.new') }}">@lang('menu.campaigns.new')</a></li>
                         <li><a href="{{ URL::route('public.campaigns.manage') }}">@lang('menu.campaigns.manage')</a></li>
+                        @if( ! is_null( $categories ) && ! empty( $categories ) )
+                        <li class="divider"></li>
+                            @foreach( $categories as $category )
+                            <li><a href="{{ URL::route('public.categories.details', [ 'id' => $category->id ]) }}">{{ $category->title }}</a></li>
+                            @endforeach
+                        @endif
+                    </ul>
+                </li>
+                @endif
+                @if( ! is_null( $pages ) && ! empty( $pages ) )
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <strong>@lang('menu.about.dropdown')</strong>
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        @foreach( $pages as $index => $page )
+                        <li><a href="{{ URL::route('public.pages.details', ['id' => $page->id]) }}">{{ $page->title }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
                 @endif

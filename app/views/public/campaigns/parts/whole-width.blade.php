@@ -6,7 +6,7 @@
                 <h3>
                     <a href="{{ URL::route('public.campaigns.details', [ 'id' => $campaign->id ]) }}" title="{{ $campaign->title }}">{{ $campaign->title }}</a>
                 </h3>
-                <p style="height: 100px">{{ strlen($campaign->description) > 253 ? substr($campaign->description, 0, 250) . '...' : $campaign->description }}</p>
+                <p>{{ strlen($campaign->description) > 253 ? substr($campaign->description, 0, 250) . '...' : $campaign->description }}</p>
                 <div class="row">
                     <div class="col-xs-4 col-md-4 col-sm-4">
                         <div class="btn-group pull-left">

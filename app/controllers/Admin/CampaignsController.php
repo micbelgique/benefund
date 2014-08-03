@@ -15,7 +15,7 @@ class CampaignsController extends BaseController {
      */
     public function showIndex() {
 
-        $campaigns = Campaign::where('item_vendor_id', Auth::user()->id);
+        $campaigns = Campaign::where('id', '>', '0'); // where('item_vendor_id', Auth::user()->id);
 
         if( Input::get('s', '') != '' ) {
             $campaigns->where('title', 'LIKE', '%' . Input::get('s') . '%')
@@ -27,7 +27,7 @@ class CampaignsController extends BaseController {
 
         $campaigns->orderBy('id', 'desc');
 
-        $this->layout->content = View::make('public.campaigns.manage');
+        $this->layout->content = View::make('admin.campaigns.index');
         $this->layout->content->campaigns = $campaigns->get();;
         $this->layout->content_title = Lang::get('campaigns.manage.title');
     }

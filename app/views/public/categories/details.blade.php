@@ -6,7 +6,7 @@
 @endif
 
 <div class="well well-lg">{{ $category->description }}</div>
-<h2>@lang('public.categories.active_campaigns')</h2>
+<h2>@lang('categories.active_campaigns')</h2>
 @if( count( $campaigns ) > 0 )
     @foreach( $campaigns as $index => $campaign )
         @include('public.campaigns.parts.whole-width')

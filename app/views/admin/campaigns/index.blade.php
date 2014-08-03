@@ -19,7 +19,7 @@
         </div>
         <div class="pull-right">
             <p>
-                <form action="{{ URL::route('admin.campaigns.manage') }}" type="get" class="form-inline">
+                <form action="{{ URL::route('admin.campaigns') }}" type="get" class="form-inline">
                     <div class="input-group">
                         <input type="text" class="form-control" name="s" id="s" placeholder="@lang('campaigns.form.search.placeholder')" value="{{ Input::get('s', '') }}">
                         <span class="input-group-btn">
