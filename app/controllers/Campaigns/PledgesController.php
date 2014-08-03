@@ -2,7 +2,7 @@
 
 namespace Campaigns;
 
-use \View, \Campaign, \Category, \Lang, \Validator, \Input, \Redirect, \Auth, \Campaign\Pledge, \Response, \URL;
+use \View, \Campaign, \Category, \Lang, \Validator, \Input, \Redirect, \Auth, \Campaign\Pledge, \Response, \URL, \DB;
 
 class PledgesController extends \BaseController {
 
@@ -12,6 +12,25 @@ class PledgesController extends \BaseController {
         if( 0 < count( $pledges ) )
             foreach( $pledges as $pledge )
                 echo View::make('public.campaigns.pledges.item')->with('pledge', $pledge);
+    }
+
+    public function showFund($id) {
+        $pledge = Campaign\Pledge::find($id);
+
+        return View::make('public.campaigns.pledges.fund')->with('pledge', $pledge);
+    }
+
+    public function showBought() {
+        return View::make('public.campaigns.pledges.bought');
+    }
+
+    public function postBuy( $id ) {
+        DB::table('campaigns_pledges_users')->insert(array(
+            'user_id' => Auth::user()->id,
+            'campaign_pledge_id' => $id
+        ));
+
+        return Response::json(array('status' => 'success', 'view_url' => URL::route('public.pledges.bought')));
     }
 
     public function postCreate($id) {

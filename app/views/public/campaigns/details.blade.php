@@ -52,9 +52,9 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-primary btn-sm">Buy</a>
+                                        <a href="{{ URL::route('public.pledges.fund', [ 'id' => $pledge->id ]) }}" class="btn btn-primary btn-sm pledge-fund">Fund this item</a>
                                     </div>
-                                    <div class="pull-right">
+                                    <div class="pull-right hidden">
                                         <span class="label label-warning">Limited 7/7</span><br />
                                     </div>
                                 </div>
@@ -119,5 +119,11 @@
 <div class="row">
     <div class="col-md-12">
         <p>{{ $campaign->target_description }}</p>
+    </div>
+</div>
+<div id="pledge-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
     </div>
 </div>
