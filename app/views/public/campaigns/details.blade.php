@@ -5,12 +5,6 @@
 </div>
 @endif
 
-@if( Auth::check() && ( $campaign->vendor->id == Auth::user()->id || Auth::user()->role->name_tag == 'admin' ) )
-<div class="pull-right">
-    <a href="{{ URL::route('public.campaigns.edit', [ 'id' => $campaign->id ]) }}" class="btn btn-primary">@lang('campaigns.buttons.edit')</a>
-</div>
-@endif
-
 <div class="row">
     <div class="col-xs-12">
         <div class="thumbnail">
@@ -33,6 +27,12 @@
         </div>
     </div>
 </div>
+@if( Auth::check() && ( $campaign->vendor->id == Auth::user()->id || Auth::user()->role->name_tag == 'admin' ) )
+<div class="pull-right">
+    <a href="{{ URL::route('public.campaigns.edit', [ 'id' => $campaign->id ]) }}" class="btn btn-primary">Edit this campaign</a>
+</div>
+<br><br><br>
+@endif
 <div class="row">
     <div class="col-md-12">
         <div class="thumbnail" style="padding: 12px">
