@@ -78,6 +78,18 @@
         <input type="hidden" name="category_id" id="category_id" value="0">
         @endif
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="thumb">@lang('campaigns.form.labels.thumb')</label>
+                <input type="file" accept="image/png, image/jpeg, image/gif" name="thumb"/>
+            </div>
+            <div class="form-group">
+                <label for="cover">@lang('campaigns.form.labels.cover')</label>
+                <input type="file" accept="image/png, image/jpeg, image/gif" name="cover"/>
+            </div>
+        </div>
+    </div>
     <hr>
     <h4>@lang('campaigns.form.labels.item')</h4>
     <div class="row">

@@ -17,7 +17,7 @@ class CategoriesController extends BaseController {
         $this->layout->content = View::make('public.categories.details');
         $this->layout->content->category = $category;
         $this->layout->content->campaigns = $campaigns;
-        $this->layout->content_title = Lang::get('categories.details.title', array('category', $category->title));
+        $this->layout->content_title = Lang::get('categories.details.title', array('category' => $category->title));
 
     }
 

@@ -25,3 +25,5 @@ Route::post('/campaigns/new', array('as' => 'public.campaigns.create', 'uses' =>
 Route::get('/campaigns/{id}', array('as' => 'public.campaigns.details', 'uses' => 'CampaignsController@showDetails'));
 
 Route::get('/categories/{id}', array('as' => 'public.categories.details', 'uses' => 'CategoriesController@showDetails'));
+
+Route::get('/pages/{id}', array('as' => 'public.pages.details', 'uses' => 'PagesController@showDetails'));

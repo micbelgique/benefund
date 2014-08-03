@@ -5,13 +5,13 @@
 </div>
 @endif
 
-<form action="{{ URL::route('public.campaigns.update', ['id' => $campaign->id]) }}" method="post"  enctype="multipart/form-data">
+<form action="{{ URL::route('public.campaigns.update', ['id' => $campaign->id]) }}" method="post" enctype="multipart/form-data">
     <h4>@lang('campaigns.form.labels.introduction')</h4>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group {{ 'create_campaign' == Input::old('action', '') && $errors->has('title') ? 'has-error has-feedback' : '' }}">
                 <label for="name">@lang('campaigns.form.labels.title')</label>
-                <input type="text" class="form-control" name="title" id="title" value="{{ Input::old('title', $campaign->title) }}" placeholder="@lang('campaigns.form.placeholders.title')">
+                <input type="text" class="form-control" name="title" id="title" value="{{ 'create_campaign' == Input::old('action', '') ? Input::old('title', $campaign->title) : $campaign->title }}" placeholder="@lang('campaigns.form.placeholders.title')">
                 @if( 'create_campaign' == Input::old('action', '') && $errors->has('title' ) )
                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                 <span class="help-block">{{ $errors->first('title') }}</span>
@@ -21,7 +21,7 @@
         <div class="col-md-12">
             <div class="form-group {{ 'create_campaign' == Input::old('action', '') && $errors->has('description') ? 'has-error has-feedback' : '' }}">
                 <label for="name">@lang('campaigns.form.labels.description')</label>
-                <textarea class="form-control summernote" rows="3" name="description" id="description">{{ Input::old('description', $campaign->description) }}</textarea>
+                <textarea class="form-control summernote" rows="3" name="description" id="description">{{ 'create_campaign' == Input::old('action', '') ? Input::old('description', $campaign->description) : $campaign->description }}</textarea>
                 @if( 'create_campaign' == Input::old('action', '') && $errors->has('description' ) )
                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                 <span class="help-block">{{ $errors->first('description') }}</span>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-md-10">
                     <div class="form-group">
-                        <label for="thumb">@lang('admin/campaigns.form.labels.thumb')</label>
+                        <label for="thumb">@lang('campaigns.form.labels.thumb')</label>
                         <input type="file" accept="image/png, image/jpeg, image/gif" name="thumb"/>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="cover">@lang('admin/campaigns.form.labels.cover')</label>
+                        <label for="cover">@lang('campaigns.form.labels.cover')</label>
                         <input type="file" accept="image/png, image/jpeg, image/gif" name="cover"/>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
         <div class="col-md-6">
             <div class="form-group {{ 'create_campaign' == Input::old('action', '') && $errors->has('item_target_description') ? 'has-error has-feedback' : '' }}">
                 <label for="name">@lang('campaigns.form.labels.target_description')</label>
-                <textarea class="form-control summernote" rows="8" name="target_description" id="target_description">{{ Input::old('target_description', $campaign->target_description) }}</textarea>
+                <textarea class="form-control summernote" rows="8" name="target_description" id="target_description">{{ Input::old('target_description', $campaign->target_description) }} </textarea>
                 @if( 'create_campaign' == Input::old('action', '') && $errors->has('target_description' ) )
                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                 <span class="help-block">{{ $errors->first('target_description') }}</span>

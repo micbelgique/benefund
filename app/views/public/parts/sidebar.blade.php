@@ -1,6 +1,14 @@
 <div class="panel panel-info">
-  <div class="panel-heading">@lang('sidebar.categories.title')</div>
+  <div class="panel-heading">Quick links</div>
+  <div class="list-group">
+    <a class="list-group-item active" href="{{ URL::route('public.campaigns.new') }}"><span style="display: inline-block; width: 30px" class="glyphicon glyphicon-plus"></span> @lang('menu.campaigns.new')</a>
+    <a class="list-group-item" href="{{ URL::route('public.campaigns.manage') }}"><span style="display: inline-block; width: 30px" class="glyphicon glyphicon-th-list"></span>Manage your campaigns</a>
+    <a class="list-group-item" href="{{ URL::route('profile') }}"><span style="display: inline-block; width: 30px" class="glyphicon glyphicon-user"></span>@lang('menu.edit_profile')</a>
+  </div>
+</div>
 
+<div class="panel panel-primary">
+  <div class="panel-heading">@lang('sidebar.categories.title')</div>
   <!-- List group -->
   <div class="list-group">
     @if( ! is_null( $categories ) && ! empty( $categories ) )

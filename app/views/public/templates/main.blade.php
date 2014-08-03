@@ -30,7 +30,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
+                <br>
                 <h1 class="page-header">{{ $content_title }}</h1>
+                <br>
             </div>
         </div>
         <div class="row">
