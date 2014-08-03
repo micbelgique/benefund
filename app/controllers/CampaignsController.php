@@ -20,7 +20,7 @@ class CampaignsController extends BaseController {
         // If no item in database
         if(empty($campaign) || empty($campaign->id))
             return Redirect::route('home')
-                ->with('message', Lang::get('admin/campaigns.inexistant'));
+                ->with('message', Lang::get('campaigns.inexistant'));
 
         $this->layout->content = View::make('public.campaigns.details');
         $this->layout->content->campaign = $campaign;
@@ -54,6 +54,7 @@ class CampaignsController extends BaseController {
 
             $cover = Input::file('cover', null);
             if( null !== $cover ) {
+                Croppa::delete('uploads/campaigns/covers/' . $id . '.png');
                 $destination_path = 'uploads/campaigns/covers';
                 $file_name = $category->id;
 
@@ -65,14 +66,15 @@ class CampaignsController extends BaseController {
                 $cover_passes = true;
             }
 
-            if(!$cover_passes){
+            if(is_bool($cover_passes) && $cover_passes == false){
                 return Redirect::back()
-                    ->with('message', Lang::get('admin/campaigns.cover.bad_upload_error'))
+                    ->with('message', Lang::get('campaigns.cover.bad_upload_error'))
                     ->withInput();
             }
 
             $thumb = Input::file('thumb', null);
             if( null !== $thumb ) {
+                Croppa::delete('uploads/campaigns/thumbs/' . $id . '.png');
                 $destination_path = 'uploads/campaigns/thumbs';
                 $file_name = $category->id;
 
@@ -84,9 +86,9 @@ class CampaignsController extends BaseController {
                 $thumb_passes = true;
             }
 
-            if(!$thumb_passes){
+            if(is_bool($thumb_passes) && $thumb_passes == false){
                 return Redirect::back()
-                    ->with('message', Lang::get('admin/campaigns.thumb.bad_upload_error'))
+                    ->with('message', Lang::get('campaigns.thumb.bad_upload_error'))
                     ->withInput();
             }
 
@@ -130,24 +132,51 @@ class CampaignsController extends BaseController {
 
         $validator = Validator::make( Input::all(), Campaign::$rules );
 
+        $data = Input::all();
+        $data['item_price'] = intval(Input::get('item_price', 0) * 100 );
+
         if( $validator->passes() ) {
-            $campaign->fill(
-                array(
-                    'title'                 => Input::get('title'),
-                    'description'           => Input::get('description'),
-                    'item_title'            => Input::get('item_title'),
-                    'item_description'      => Input::get('item_description'),
-                    'target_title'          => Input::get('target_title'),
-                    'target_adress_street'  => Input::get('target_adress_street'),
-                    'target_adress_street2' => Input::get('target_adress_street2'),
-                    'target_adress_zip'     => Input::get('target_adress_zip'),
-                    'target_adress_city'    => Input::get('target_adress_city'),
-                    'target_adress_country' => Input::get('target_adress_country'),
-                    'target_description'    => Input::get('target_description'),
-                    'item_price'            => intval(Input::get('item_price', 0) * 100 ),
-                    'category_id'           => Input::get('category_id'),
-                )
-            )->save();
+            $campaign->fill($data)->save();
+
+            $cover = Input::file('cover', null);
+            if( null !== $cover ) {
+                Croppa::delete('uploads/campaigns/covers/' . $id . '.png');
+                $destination_path = 'uploads/campaigns/covers';
+                $file_name = $campaign->id;
+
+                $path_parts = explode('.', $cover->getClientOriginalName() );
+                $ext = $path_parts[count($path_parts) - 1];
+
+                $cover_passes = Input::file('cover')->move($destination_path, $file_name . '.png');
+            } else {
+                $cover_passes = true;
+            }
+
+            if(is_bool($cover_passes) && $cover_passes == false){
+                return Redirect::back()
+                    ->with('message', Lang::get('campaigns.cover.bad_upload_error'))
+                    ->withInput();
+            }
+
+            $thumb = Input::file('thumb', null);
+            if( null !== $thumb ) {
+                Croppa::delete('uploads/campaigns/thumbs/' . $id . '.png');
+                $destination_path = 'uploads/campaigns/thumbs';
+                $file_name = $campaign->id;
+
+                $path_parts = explode('.', $thumb->getClientOriginalName() );
+                $ext = $path_parts[count($path_parts) - 1];
+
+                $thumb_passes = Input::file('thumb')->move($destination_path, $file_name . '.png');
+            } else {
+                $thumb_passes = true;
+            }
+
+            if(is_bool($thumb_passes) && $thumb_passes == false){
+                return Redirect::back()
+                    ->with('message', Lang::get('campaigns.thumb.bad_upload_error'))
+                    ->withInput();
+            }
 
             return Redirect::back()->with('message', Lang::get('campaigns.edit.message', array('title' => Input::get('title'))));
         } else {
